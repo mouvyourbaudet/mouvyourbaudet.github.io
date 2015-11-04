@@ -1,0 +1,99 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../myb-place/myb-place.html">
+<link rel="import" href="../myb-date/myb-date.html">
+
+<dom-module id="myb-album-item">
+
+  <style>
+    paper-card {
+      margin-bottom: 16px;
+      margin-right: 16px;
+      width: 100%;
+      /*height: 100%;*/
+      /*margin-bottom: 16px;*/
+      /*padding: 0px;*/
+      /*--paper-card-header-color: orange;*/
+    }
+
+    .title {
+      color: var(--default-primary-color);
+      /*font-size: 1.5em;*/
+      /*font-weight: 600;*/
+    }
+
+    iron-image {
+      /*max-width: 100%;*/
+      width: 100%;
+      height: 100%;
+      /*min-width: 200px;*/
+      /*min-height: 200px;*/
+    }
+
+    iron-icon[icon="perm-media"] {
+      color: var(--accent-color);
+    }
+  </style>
+
+  <template>
+    <paper-card>
+
+      <div class="card-content flex">
+          <a href="{{url(item.gphoto$id.$t)}}">
+        <template is="dom-repeat" items="[[item.media$group.media$content]]" as="photo">
+          <iron-image cross-fade preload fade class="flex" src="{{photo.url}}" width="100%" height="100%"></iron-image>
+        </template>
+          </a>
+
+        <div class="title"><h1>{{item.title.$t}}</h1></div>
+
+        <template is="dom-if" if="{{item.media$group.media$description.$t}}">
+          <span>{{item.media$group.media$description.$t}}</span>
+        </template>
+
+      </div>
+
+      <template is="dom-if" if="{{item.gphoto$numphotos.$t}}">
+        <div class="card-actions">
+          <iron-icon icon="perm-media"></iron-icon>
+          <span class="paper-font-body1">{{item.gphoto$numphotos.$t}}</span>
+          <span class="paper-font-body1"> photos</span>
+        </div>
+      </template>
+
+      <template is="dom-if" if="{{item.gphoto$timestamp.$t}}">
+        <div class="card-actions">
+          <myb-date date="{{date(item.gphoto$timestamp.$t)}}"></myb-date>
+        </div>
+      </template>
+
+      <template is="dom-if" if="{{item.gphoto$location.$t}}">
+        <div class="card-actions">
+          <myb-place place="{{item.gphoto$location.$t}}"></myb-place>
+        </div>
+      </template>
+
+    </paper-card>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'myb-album-item',
+      properties: {
+        item: Object
+      },
+      url: function(string){
+        return '/albums/'+string;
+      },
+      date: function (string) {
+        return parseInt(string) / 1000;
+      },
+      toString: function (s) {
+        return JSON.stringify(s);
+      }
+    });
+  </script>
+
+</dom-module>

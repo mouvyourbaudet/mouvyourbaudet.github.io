@@ -1,0 +1,64 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/firebase-element/firebase-collection.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item-body.html">
+
+<dom-module id="myb-friend-list">
+<style>
+  .avatar {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--text-primary-color);
+    margin: 20px;
+  }
+
+  .friend-link {
+    color: var(--default-primary-color);
+    font-weight: 600;
+  }
+
+  a:-webkit-any-link {
+    text-decoration: none;
+  }
+
+  .iconAccent {
+    fill: var(--accent-color);
+    padding-right: 3px;
+    width:20px;
+    height:20px;
+  }
+</style>
+  <template>
+    <firebase-collection
+      order-by-child="height"
+      location="https://myb.firebaseio.com/friends"
+      data="{{friends}}"></firebase-collection>
+    <paper-material elevation="1">
+      <div class="list" role="list">
+    <template is="dom-repeat" items="[[friends]]">
+        <paper-item>
+        <a href="{{item.url}}">
+          <img class="avatar" src="{{item.image}}">
+        </a>
+          <paper-item-body two-line class="layout vertical">
+            <div>[[item.name]]</div>
+            <div secondary>[[item.description]]</div>
+            <div secondary><iron-icon icon="icons:cloud-circle" class="iconAccent"></iron-icon><a href="{{item.url}}"><span class="friend-link">[[item.url]]</span></a></div>
+          </paper-item-body>
+        </paper-item>
+    </template>
+      </div>
+    </paper-material>
+
+  </template>
+
+  <script>
+    Polymer({
+      is: 'myb-friend-list'
+    });
+  </script>
+
+</dom-module>

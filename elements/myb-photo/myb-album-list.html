@@ -1,0 +1,31 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="myb-album-item.html">
+
+<dom-module id="myb-album-list">
+  <template>
+    <iron-ajax
+      auto
+      url="{{url(user)}}"
+      handle-as="json"
+      last-response="{{data}}"></iron-ajax>
+
+      <template is="dom-repeat" items="[[data.feed.entry]]" as="item">
+          <myb-album-item item="{{item}}"></myb-album-item>
+      </template>
+
+  </template>
+</dom-module>
+
+<script>
+    Polymer({
+      is: 'myb-album-list',
+      properties: {
+        user: String,
+        data: Object
+      },
+      url: function(user){
+          return 'https://picasaweb.google.com/data/feed/api/user/'+user+'?alt=json';
+      }
+    });
+</script>

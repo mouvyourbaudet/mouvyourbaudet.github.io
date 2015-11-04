@@ -1,0 +1,114 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<script src="../bower_components/page/page.js"></script>
+<script>
+  window.addEventListener('WebComponentsReady', function() {
+
+    // We use Page.js for routing. This is a Micro
+    // client-side router inspired by the Express router
+    // More info: https://visionmedia.github.io/page.js/
+
+    // Middleware
+    function scrollToTop(ctx, next) {
+      app.scrollPageToTop();
+      next();
+    }
+
+    // Routes
+    page('/', scrollToTop, function() {
+      app.route = 'home';
+      app.title = 'Mouv\' your Baudet';
+      app.subtitle = '- Fanfare Poitiers -';
+      app.background = 'home';
+    });
+
+    page('/news', scrollToTop, function() {
+      app.route = 'news';
+      app.title = 'News';
+      app.subtitle = 'Mouv\' your Baudet';
+      app.background = 'news';
+    });
+
+    page('/introduction', scrollToTop, function() {
+      app.route = 'introduction';
+      app.title = 'Présentation';
+      app.subtitle = 'Mouv\' your Baudet';
+      app.background = 'introduction';
+    });
+
+    page('/songs', scrollToTop, function() {
+      app.route = 'songs';
+      app.title = 'Répertoire';
+      app.subtitle = 'Mouv\' your Baudet';
+      app.background = 'songs';
+    });
+
+    page('/performances', scrollToTop, function() {
+      app.route = 'performances';
+      app.title = 'Prestations';
+      app.subtitle = 'Mouv\' your Baudet';
+      app.background = 'performances';
+    });
+
+    page('/albums', scrollToTop, function() {
+      app.route = 'albums';
+      app.title = 'Photos';
+      app.subtitle = 'Mouv\' your Baudet';
+      app.background = 'albums';
+    });
+
+    page('/albums/:album', scrollToTop, function(data) {
+      app.route = 'photos';
+      app.title = 'Photos';
+      app.subtitle = 'Mouv\' your Baudet';
+      app.background = 'photos';
+      app.params = data.params;
+    });
+
+    page('/videos', scrollToTop, function() {
+      app.route = 'videos';
+      app.title = 'Vidéos';
+      app.subtitle = 'Mouv\' your Baudet';
+      app.background = 'videos';
+    });
+
+    page('/friends', scrollToTop, function() {
+      app.route = 'friends';
+      app.title = 'Amis';
+      app.subtitle = 'Mouv\' your Baudet';
+      app.background = 'friends';
+    });
+
+    page('/contact', scrollToTop, function() {
+      app.route = 'contact';
+      app.title = 'Contact';
+      app.subtitle = 'Mouv\' your Baudet';
+      app.background = 'contact';
+    });
+
+    page('/404', scrollToTop, function() {
+      app.route = '404';
+      app.title = 'Erreur 404';
+      app.subtitle = 'Mouv\' your Baudet';
+      app.background = 'error404';
+    });
+
+    page('*', scrollToTop, function() {
+      page.redirect('/404');
+    });
+
+    // add #! before urls
+    page({
+      hashbang: true
+    });
+
+  });
+</script>
