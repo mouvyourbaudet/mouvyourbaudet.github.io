@@ -1,0 +1,77 @@
+<dom-module id="myb-pagination">
+
+    <style>
+        .center {
+            text-align: center;
+        }
+        paper-button{
+            margin-bottom: 16px;
+        }
+    </style>
+
+    <template>
+        <div class="center">
+            <paper-button elevation="0" hidden$="{{previous}}" noink>&nbsp;</paper-button>
+            <paper-button elevation="1" hidden$="{{!previous}}" on-click="goPrevious" raised>&lt;&lt;</paper-button>
+            <paper-button elevation="1" raised>{{self}}</paper-button>
+            <paper-button elevation="1" hidden$="{{!next}}" on-click="goNext" raised>&gt;&gt;</paper-button>
+            <paper-button elevation="0" hidden$="{{next}}" noink>&nbsp;</paper-button>
+        </div>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'myb-pagination',
+            properties: {
+                links: Object,
+                page: Object,
+                url: {
+                    type: String,
+                    notify: true
+                },
+                self: {
+                    type: Number,
+                    computed: 'calcSelf(page)'
+                },
+                previous: {
+                    type: String,
+                    computed: 'calcPrevious(links)'
+                },
+                next: {
+                    type: String,
+                    computed: 'calcNext(links)'
+                }
+            },
+
+            calcSelf: function (page) {
+                return page.number + 1;
+            },
+
+            calcPrevious: function (links) {
+                if (links.prev) {
+                    return links.prev.href;
+                }
+
+                return false;
+            },
+
+            calcNext: function (links) {
+                if (links.next) {
+                    return links.next.href;
+                }
+
+                return false;
+            },
+
+            goPrevious: function () {
+                this.url = this.previous;
+            },
+
+            goNext: function () {
+                this.url = this.next;
+            }
+
+        });
+    </script>
+
+</dom-module>

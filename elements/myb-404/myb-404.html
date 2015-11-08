@@ -1,0 +1,33 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/iron-image/iron-image.html">
+
+<dom-module id="myb-404">
+  <style>
+    paper-card {
+      width: 100%;
+      --paper-card-header-color: var(--default-primary-color);
+    }
+    iron-image{
+      width: 100%;
+    }
+
+  </style>
+  <template>
+    <paper-card elevation="1" heading="Que cherchez-vous ?">
+      <div class="card-content">
+      <div class="flex vertical layout">
+        <iron-image cross-fade preload fade class="flex" src="prpp.jpg"></iron-image>
+    </div>
+    </div>
+    </paper-card>
+
+  </template>
+
+  <script>
+    Polymer({
+      is: 'myb-404'
+    });
+  </script>
+
+</dom-module>

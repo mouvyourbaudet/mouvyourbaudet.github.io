@@ -1,0 +1,62 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../myb-place/myb-place.html">
+<link rel="import" href="../myb-date/myb-date.html">
+
+<dom-module id="myb-video-item">
+
+    <style>
+        paper-card {
+          margin-bottom: 16px;
+          margin-right: 16px;
+            width: 100%;
+            /*margin-bottom: 16px;*/
+            /*padding: 0px;*/
+            /*--paper-card-header-color: orange;*/
+        }
+      .title{
+        color: var(--default-primary-color);
+        /*font-size: 1.5em;*/
+        /*font-weight: 600;*/
+      }
+    </style>
+
+    <template>
+        <paper-card>
+            <div class="card-content">
+            <google-youtube
+                    video-id="{{item.url}}"
+                    width="100%"
+                    rel="0"
+                    start="0"
+                    autoplay="0" class="flex">
+            </google-youtube>
+                <div class="title"><h1>{{item.title}}</h1></div>
+              <template is="dom-if" if="{{item.content}}">
+                <span>{{item.content}}</span>
+              </template>
+
+            </div>
+
+            <div class="card-actions">
+                <myb-date date="{{item.date}}"></myb-date>
+            </div>
+
+            <div class="card-actions">
+                <myb-place place="{{item.place}}"></myb-place>
+            </div>
+
+        </paper-card>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'myb-video-item',
+            properties: {
+                item: Object
+            }
+        });
+    </script>
+
+</dom-module>

@@ -1,0 +1,58 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../myb-place/myb-place.html">
+<link rel="import" href="../myb-date/myb-date.html">
+
+<dom-module id="myb-performance-item">
+
+    <style>
+        paper-card {
+            width: 100%;
+            margin-bottom: 16px;
+            --paper-card-header-color: var(--default-primary-color);
+        }
+      .image{
+        display: inline-block;
+      }
+    </style>
+
+    <template>
+        <paper-card heading="{{item.title}}">
+            <div class="card-content">
+
+              <template is="dom-if" if="{{item.image}}">
+                <a href="{{item.image}}" class="image" target="_blank">
+                  <img src="{{item.image}}" height="100px">
+                </a>
+              </template>
+
+
+              <span>{{item.content}}</span></div>
+
+            <div class="card-actions">
+                <myb-date date="{{item.startDate}}"></myb-date>
+            </div>
+            <template is="dom-if" if="{{item.endDate}}">
+            <div class="card-actions">
+                <myb-date date="{{item.endDate}}"></myb-date>
+            </div>
+              </template>
+            <template is="dom-if" if="{{item.place}}">
+            <div class="card-actions">
+                <myb-place place="{{item.place}}"></myb-place>
+            </div>
+            </template>
+        </paper-card>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'myb-performance-item',
+            properties: {
+                item: Object
+            }
+        });
+    </script>
+
+</dom-module>
