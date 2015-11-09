@@ -1,77 +1,80 @@
 <!doctype html><html lang=""><head><meta charset="utf-8"><meta name="description" content=""><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="generator" content="Mouv' Your Baudet"><title>Mouv' Your Baudet</title><meta name="theme-color" content="#37474F"><link rel="manifest" href="manifest.json"><meta name="msapplication-TileColor" content="#37474F"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="PSK"><link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="apple-mobile-web-app-title" content="Mouv' Your Baudet"><link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png"><meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png"><link rel="stylesheet" href="styles/main.css"><script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script><link rel="import" href="elements/elements.vulcanized.html"><style is="custom-style" include="shared-styles"></style></head><body unresolved="" class="fullbleed layout vertical"><span id="browser-sync-binding"></span><template is="dom-bind" id="app"><paper-drawer-panel id="paperDrawerPanel"><paper-scroll-header-panel drawer="" fixed=""><style is="custom-style">
-	   paper-menu a > *, paper-menu paper-item > *, paper-menu paper-icon-item > * {
-  		pointer-events: none;
-	   }
-          .logo {
-            height: 32px;
-            width: 43px;
-            padding-right: 12px;
-          }
-          .logo-label {
-            /*color: var(--accent-color);*/
-          }
-          .toolbar{
-            background: transparent;
-          }
+        paper-menu a > *, paper-menu paper-item > *, paper-menu paper-icon-item > * {
+          pointer-events: none;
+        }
 
-          /* background for toolbar when it is at its full size */
-          paper-scroll-header-panel.home::shadow #headerBg {
-            background-image: url(images/background/tshirt_chacaux.jpg);
-          }
+        .logo {
+          height: 32px;
+          width: 43px;
+          padding-right: 12px;
+        }
 
-          /* background for toolbar when it is at its full size */
-          paper-scroll-header-panel.news::shadow #headerBg {
-            background-image: url(images/background/7apoitiers.jpg);
-          }
+        .logo-label {
+          /*color: var(--accent-color);*/
+        }
 
-          /* background for toolbar when it is at its full size */
-          paper-scroll-header-panel.introduction::shadow #headerBg {
-            background-image: url(images/background/asinerie.jpg);
-          }
+        .toolbar {
+          background: transparent;
+        }
 
-          /* background for toolbar when it is at its full size */
-          paper-scroll-header-panel.songs::shadow #headerBg {
-            background-image: url(images/background/gensac.jpg);
-          }
+        /* background for toolbar when it is at its full size */
+        paper-scroll-header-panel.home::shadow #headerBg {
+          background-image: url(images/background/tshirt_chacaux.jpg);
+        }
 
-          /* background for toolbar when it is at its full size */
-          paper-scroll-header-panel.performances::shadow #headerBg {
-            background-image: url(images/background/maraisthon2013.jpg);
-          }
+        /* background for toolbar when it is at its full size */
+        paper-scroll-header-panel.news::shadow #headerBg {
+          background-image: url(images/background/7apoitiers.jpg);
+        }
 
-          /* background for toolbar when it is at its full size */
-          paper-scroll-header-panel.albums::shadow #headerBg {
-            background-image: url(images/background/maraisthon2013_2.jpg);
-          }
+        /* background for toolbar when it is at its full size */
+        paper-scroll-header-panel.introduction::shadow #headerBg {
+          background-image: url(images/background/asinerie.jpg);
+        }
 
-          /* background for toolbar when it is at its full size */
-          paper-scroll-header-panel.photos::shadow #headerBg {
-            background-image: url(images/background/maraisthon2013_2.jpg);
-          }
+        /* background for toolbar when it is at its full size */
+        paper-scroll-header-panel.songs::shadow #headerBg {
+          background-image: url(images/background/gensac.jpg);
+        }
 
-          /* background for toolbar when it is at its full size */
-          paper-scroll-header-panel.videos::shadow #headerBg {
-            background-image: url(images/background/chez_tina.jpg);
-          }
+        /* background for toolbar when it is at its full size */
+        paper-scroll-header-panel.performances::shadow #headerBg {
+          background-image: url(images/background/maraisthon2013.jpg);
+        }
 
-          /* background for toolbar when it is at its full size */
-          paper-scroll-header-panel.friends::shadow #headerBg {
-            background-image: url(images/background/rillette_asinerie.jpg);
-            filter: brightness(0.5)
-          }
+        /* background for toolbar when it is at its full size */
+        paper-scroll-header-panel.albums::shadow #headerBg {
+          background-image: url(images/background/maraisthon2013_2.jpg);
+        }
 
-          /* background for toolbar when it is at its full size */
-          paper-scroll-header-panel.contact::shadow #headerBg {
-            background-image: url(images/background/maraisthon2013_3.jpg);
-          }
+        /* background for toolbar when it is at its full size */
+        paper-scroll-header-panel.photos::shadow #headerBg {
+          background-image: url(images/background/maraisthon2013_2.jpg);
+        }
 
-          /* background for toolbar when it is at its full size */
-          paper-scroll-header-panel.error404::shadow #headerBg {
-            background-image: url(images/background/rudy.jpg);
-          }
+        /* background for toolbar when it is at its full size */
+        paper-scroll-header-panel.videos::shadow #headerBg {
+          background-image: url(images/background/chez_tina.jpg);
+        }
 
-          /* background for toolbar when it is condensed */
-          paper-scroll-header-panel::shadow #condensedHeaderBg {
-            background-color: var(--default-primary-color);
-          }
-        </style><paper-toolbar id="drawerToolbar" class="paper-scroll"><img src="images/myb_logo.svg" class="logo"> <span class="paper-font-title logo-label">Mouv' your Baudet</span></paper-toolbar><paper-menu class="list" attr-for-selected="data-route" selected="[[route]]"><a data-route="home" href="/" on-click="onDataRouteClick"><iron-icon icon="home"></iron-icon><span>Accueil</span></a> <a data-route="news" href="/news" on-click="onDataRouteClick"><iron-icon icon="language"></iron-icon><span>News</span></a> <a data-route="introduction" href="/introduction" on-click="onDataRouteClick"><iron-icon icon="supervisor-account"></iron-icon><span>Présentation</span></a> <a data-route="songs" href="/songs" on-click="onDataRouteClick"><iron-icon icon="image:audiotrack"></iron-icon><span>Répertoire</span></a> <a data-route="performances" href="/performances" on-click="onDataRouteClick"><iron-icon icon="event"></iron-icon><span>Prestations</span></a> <a data-route="albums" href="/albums" on-click="onDataRouteClick"><iron-icon icon="perm-media"></iron-icon><span>Photos</span></a> <a data-route="videos" href="/videos" on-click="onDataRouteClick"><iron-icon icon="av:videocam"></iron-icon><span>Vidéos</span></a> <a data-route="friends" href="/friends" on-click="onDataRouteClick"><iron-icon icon="social:group"></iron-icon><span>Amis</span></a> <a data-route="contact" href="/contact" on-click="onDataRouteClick"><iron-icon icon="mail"></iron-icon><span>Contact</span></a></paper-menu></paper-scroll-header-panel><paper-scroll-header-panel main="" condenses="" keep-condensed-header="" class$="{{background}}"><paper-toolbar id="mainToolbar" class="tall toolbar"><paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle=""></paper-icon-button><span class="flex"></span><div class="middle middle-container center horizontal layout"><div class="app-name" style="font-weight: 400;">{{title}}</div></div><div class="bottom bottom-container center horizontal layout"><div class="bottom-title paper-font-subhead" style="font-weight: 500;">{{subtitle}}</div></div></paper-toolbar><div class="content"><iron-pages attr-for-selected="data-route" selected="{{route}}"><section data-route="home"><myb-home></myb-home></section><section data-route="news"><myb-news-list></myb-news-list></section><section data-route="introduction"><myb-introduction></myb-introduction></section><section data-route="songs"><myb-song-list></myb-song-list></section><section data-route="performances"><myb-performance-list></myb-performance-list></section><section data-route="albums"><myb-album-list user="mouvyourweb"></myb-album-list></section><section data-route="photos"><div class="layout vertical fit" style="padding-top: 200px;"><myb-photo user="mouvyourweb" album="{{params.album}}" class="flex"></myb-photo></div></section><section data-route="videos"><myb-video-list></myb-video-list></section><section data-route="friends"><myb-friend-list></myb-friend-list></section><section data-route="contact"><myb-contact></myb-contact></section><section data-route="404"><myb-404></myb-404></section></iron-pages></div></paper-scroll-header-panel></paper-drawer-panel></template><script src="scripts/app.js"></script></body></html>
+        /* background for toolbar when it is at its full size */
+        paper-scroll-header-panel.friends::shadow #headerBg {
+          background-image: url(images/background/rillette_asinerie.jpg);
+          filter: brightness(0.5)
+        }
+
+        /* background for toolbar when it is at its full size */
+        paper-scroll-header-panel.contact::shadow #headerBg {
+          background-image: url(images/background/maraisthon2013_3.jpg);
+        }
+
+        /* background for toolbar when it is at its full size */
+        paper-scroll-header-panel.error404::shadow #headerBg {
+          background-image: url(images/background/rudy.jpg);
+        }
+
+        /* background for toolbar when it is condensed */
+        paper-scroll-header-panel::shadow #condensedHeaderBg {
+          background-color: var(--default-primary-color);
+        }
+      </style><paper-toolbar id="drawerToolbar" class="paper-scroll"><img src="images/myb_logo.svg" class="logo"> <span class="paper-font-title logo-label">Mouv' your Baudet</span></paper-toolbar><paper-menu class="list" attr-for-selected="data-route" selected="[[route]]"><a data-route="home" href="/" on-click="onDataRouteClick"><iron-icon icon="home"></iron-icon><span>Accueil</span></a> <a data-route="news" href="/news" on-click="onDataRouteClick"><iron-icon icon="language"></iron-icon><span>News</span></a> <a data-route="introduction" href="/introduction" on-click="onDataRouteClick"><iron-icon icon="supervisor-account"></iron-icon><span>Présentation</span></a> <a data-route="songs" href="/songs" on-click="onDataRouteClick"><iron-icon icon="image:audiotrack"></iron-icon><span>Répertoire</span></a> <a data-route="performances" href="/performances" on-click="onDataRouteClick"><iron-icon icon="event"></iron-icon><span>Prestations</span></a> <a data-route="albums" href="/albums" on-click="onDataRouteClick"><iron-icon icon="perm-media"></iron-icon><span>Photos</span></a> <a data-route="videos" href="/videos" on-click="onDataRouteClick"><iron-icon icon="av:videocam"></iron-icon><span>Vidéos</span></a> <a data-route="friends" href="/friends" on-click="onDataRouteClick"><iron-icon icon="social:group"></iron-icon><span>Amis</span></a> <a data-route="contact" href="/contact" on-click="onDataRouteClick"><iron-icon icon="mail"></iron-icon><span>Contact</span></a></paper-menu></paper-scroll-header-panel><paper-scroll-header-panel main="" condenses="" keep-condensed-header="" class$="{{background}}"><paper-toolbar id="mainToolbar" class="tall toolbar"><paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle=""></paper-icon-button><span class="flex"></span><div class="middle middle-container center horizontal layout"><div class="app-name" style="font-weight: 400;">{{title}}</div></div><div class="bottom bottom-container center horizontal layout"><div class="bottom-title paper-font-subhead" style="font-weight: 500;">{{subtitle}}</div></div></paper-toolbar><div class="content"><section><template is="dom-if" if="{{isPageSelected(route, 'home')}}"><myb-home></myb-home></template><template is="dom-if" if="{{isPageSelected(route, 'news')}}"><myb-news-list></myb-news-list></template><template is="dom-if" if="{{isPageSelected(route, 'introduction')}}"><myb-introduction></myb-introduction></template><template is="dom-if" if="{{isPageSelected(route, 'songs')}}"><myb-song-list></myb-song-list></template><template is="dom-if" if="{{isPageSelected(route, 'performances')}}"><myb-performance-list></myb-performance-list></template><template is="dom-if" if="{{isPageSelected(route, 'albums')}}"><myb-album-list user="mouvyourweb"></myb-album-list></template><template is="dom-if" if="{{isPageSelected(route, 'photos')}}"><div class="layout vertical fit" style="padding-top: 200px;"><myb-photo user="mouvyourweb" album="{{params.album}}" class="flex"></myb-photo></div></template><template is="dom-if" if="{{isPageSelected(route, 'videos')}}"><myb-video-list></myb-video-list></template><template is="dom-if" if="{{isPageSelected(route, 'friends')}}"><myb-friend-list></myb-friend-list></template><template is="dom-if" if="{{isPageSelected(route, 'contact')}}"><myb-contact></myb-contact></template><template is="dom-if" if="{{isPageSelected(route, '404')}}"><myb-404></myb-404></template></section></div></paper-scroll-header-panel></paper-drawer-panel></template><script src="scripts/app.js"></script></body></html>

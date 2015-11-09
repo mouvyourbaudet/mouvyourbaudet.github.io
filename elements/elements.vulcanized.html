@@ -15334,7 +15334,7 @@ module.exports = Array.isArray || function (arr) {
       border-right: 1px solid rgba(0, 0, 0, 0.14);
     }
 
-    iron-pages {
+    .content {
       padding: 48px 62px;
     }
 
@@ -21374,20 +21374,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       width: 100%;
       --paper-card-header-color: var(--default-primary-color);
     }
-    iron-image{
-      width: 100%;
-    }
 
+    iron-image {
+      --iron-image-height: 100%;
+      --iron-image-width: 100%;
+    }
   </style>
+
   <template>
     <paper-card elevation="1" heading="Que cherchez-vous ?">
       <div class="card-content">
-      <div class="flex vertical layout">
-        <iron-image cross-fade="" preload="" fade="" class="flex" src="myb-404/prpp.jpg"></iron-image>
-    </div>
-    </div>
+        <div class="flex vertical layout">
+          <iron-image cross-fade="" preload="" fade="" class="flex" src="myb-404/prpp.jpg"></iron-image>
+        </div>
+      </div>
     </paper-card>
-
   </template>
 
   <script>
@@ -21395,7 +21396,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       is: 'myb-404'
     });
   </script>
-
 </dom-module>
 <dom-module id="myb-last-news" assetpath="myb-home/">
   <template>

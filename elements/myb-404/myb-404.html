@@ -8,20 +8,21 @@
       width: 100%;
       --paper-card-header-color: var(--default-primary-color);
     }
-    iron-image{
-      width: 100%;
-    }
 
+    iron-image {
+      --iron-image-height: 100%;
+      --iron-image-width: 100%;
+    }
   </style>
+
   <template>
     <paper-card elevation="1" heading="Que cherchez-vous ?">
       <div class="card-content">
-      <div class="flex vertical layout">
-        <iron-image cross-fade preload fade class="flex" src="prpp.jpg"></iron-image>
-    </div>
-    </div>
+        <div class="flex vertical layout">
+          <iron-image cross-fade preload fade class="flex" src="prpp.jpg"></iron-image>
+        </div>
+      </div>
     </paper-card>
-
   </template>
 
   <script>
@@ -29,5 +30,4 @@
       is: 'myb-404'
     });
   </script>
-
 </dom-module>
