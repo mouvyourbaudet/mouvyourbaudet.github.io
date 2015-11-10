@@ -4,6 +4,11 @@
 <link rel="import" href="myb-last-video.html">
 
 <dom-module id="myb-home">
+  <style>
+    .last-album {
+      margin-right: 16px;
+    }
+  </style>
   <template>
     <div class="layout vertical">
       <paper-button class="self-start">Dernière news</paper-button>
@@ -12,11 +17,16 @@
       <paper-button class="self-start">Prochaine prestation</paper-button>
       <myb-last-performance></myb-last-performance>
 
-      <paper-button class="self-start">Dernier album photo</paper-button>
-      <myb-last-album user="mouvyourweb"></myb-last-album>
-
-      <paper-button class="self-start">Dernière vidéo</paper-button>
-      <myb-last-video></myb-last-video>
+      <div class="layout horizontal">
+        <div class="layout vertical flex last-album">
+          <paper-button class="self-center">Dernier album photo</paper-button>
+          <myb-last-album user="mouvyourweb"></myb-last-album>
+        </div>
+        <div class="layout vertical flex">
+          <paper-button class="self-center">Dernière vidéo</paper-button>
+          <myb-last-video></myb-last-video>
+        </div>
+      </div>
     </div>
 
   </template>
