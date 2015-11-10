@@ -5,8 +5,15 @@
 
 <dom-module id="myb-home">
   <style>
-    .last-album {
-      margin-right: 16px;
+    .last {
+      width: 400px;
+      margin: 8px 0 8px 0;
+    }
+
+    @media (min-width: 601px) {
+      .last {
+        margin: 8px;
+      }
     }
   </style>
   <template>
@@ -17,12 +24,12 @@
       <paper-button class="self-start">Prochaine prestation</paper-button>
       <myb-last-performance></myb-last-performance>
 
-      <div class="layout horizontal">
-        <div class="layout vertical flex last-album">
+      <div class="layout horizontal center-justified wrap">
+        <div class="layout vertical last">
           <paper-button class="self-center">Dernier album photo</paper-button>
           <myb-last-album user="mouvyourweb"></myb-last-album>
         </div>
-        <div class="layout vertical flex">
+        <div class="layout vertical last">
           <paper-button class="self-center">Dernière vidéo</paper-button>
           <myb-last-video></myb-last-video>
         </div>

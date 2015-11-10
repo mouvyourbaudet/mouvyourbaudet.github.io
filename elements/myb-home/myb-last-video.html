@@ -3,6 +3,12 @@
 <link rel="import" href="../myb-video/myb-video-item.html">
 
 <dom-module id="myb-last-video">
+  <style>
+    myb-video-item {
+      width: 400px;
+    }
+  </style>
+
   <template>
     <firebase-collection
       order-by-child="height"

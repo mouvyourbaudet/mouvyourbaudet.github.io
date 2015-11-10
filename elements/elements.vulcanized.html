@@ -20558,7 +20558,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <style>
     myb-video-item {
       width: 400px;
-      margin: 0 16px 16px 0;
+      margin: 8px 0 8px 0;
+    }
+
+    @media (min-width: 601px) {
+      myb-video-item {
+        margin: 8px;
+      }
     }
   </style>
 
@@ -20855,7 +20861,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     paper-card {
       height: 100%;
       width: 100%;
-      margin-bottom: 16px;
     }
 
     .title {
@@ -20940,7 +20945,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <style>
     myb-album-item {
       width: 400px;
-      margin: 0 16px 16px 0;
+      margin: 8px 0 8px 0;
+    }
+
+    @media (min-width: 601px) {
+      myb-album-item {
+        margin: 8px;
+      }
     }
   </style>
 
@@ -21359,6 +21370,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 </dom-module>
 <dom-module id="myb-last-album" assetpath="myb-home/">
+  <style>
+    myb-album-item {
+      width: 400px;
+    }
+  </style>
+
   <template>
     <iron-ajax auto="" url="{{url(user)}}" handle-as="json" last-response="{{data}}"></iron-ajax>
 
@@ -21379,6 +21396,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   });
 </script>
 <dom-module id="myb-last-video" assetpath="myb-home/">
+  <style>
+    myb-video-item {
+      width: 400px;
+    }
+  </style>
+
   <template>
     <firebase-collection order-by-child="height" limit-to-first="1" location="https://myb.firebaseio.com/videos" data="{{videos}}"></firebase-collection>
 
@@ -21395,8 +21418,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 </dom-module>
 <dom-module id="myb-home" assetpath="myb-home/">
   <style>
-    .last-album {
-      margin-right: 16px;
+    .last {
+      width: 400px;
+      margin: 8px 0 8px 0;
+    }
+
+    @media (min-width: 601px) {
+      .last {
+        margin: 8px;
+      }
     }
   </style>
   <template>
@@ -21407,12 +21437,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <paper-button class="self-start">Prochaine prestation</paper-button>
       <myb-last-performance></myb-last-performance>
 
-      <div class="layout horizontal">
-        <div class="layout vertical flex last-album">
+      <div class="layout horizontal center-justified wrap">
+        <div class="layout vertical last">
           <paper-button class="self-center">Dernier album photo</paper-button>
           <myb-last-album user="mouvyourweb"></myb-last-album>
         </div>
-        <div class="layout vertical flex">
+        <div class="layout vertical last">
           <paper-button class="self-center">Dernière vidéo</paper-button>
           <myb-last-video></myb-last-video>
         </div>
