@@ -6,30 +6,20 @@
 <link rel="import" href="../myb-date/myb-date.html">
 
 <dom-module id="myb-album-item">
-
   <style>
     paper-card {
       margin-bottom: 16px;
-      margin-right: 16px;
-      width: 100%;
-      /*height: 100%;*/
-      /*margin-bottom: 16px;*/
-      /*padding: 0px;*/
-      /*--paper-card-header-color: orange;*/
     }
 
     .title {
       color: var(--default-primary-color);
-      /*font-size: 1.5em;*/
-      /*font-weight: 600;*/
     }
 
     iron-image {
-      /*max-width: 100%;*/
       width: 100%;
       height: 100%;
-      /*min-width: 200px;*/
-      /*min-height: 200px;*/
+      --iron-image-width: 100%;
+      --iron-image-height: 100%;
     }
 
     iron-icon[icon="perm-media"] {
@@ -41,11 +31,11 @@
     <paper-card>
 
       <div class="card-content flex">
-          <a href="{{url(item.gphoto$id.$t)}}">
-        <template is="dom-repeat" items="[[item.media$group.media$content]]" as="photo">
-          <iron-image cross-fade preload fade class="flex" src="{{photo.url}}" width="100%" height="100%"></iron-image>
-        </template>
-          </a>
+        <a href="{{url(item.gphoto$id.$t)}}">
+          <template is="dom-repeat" items="[[item.media$group.media$content]]" as="photo">
+            <iron-image cross-fade preload fade class="flex" src="{{photo.url}}"/>
+          </template>
+        </a>
 
         <div class="title"><h1>{{item.title.$t}}</h1></div>
 
@@ -84,8 +74,8 @@
       properties: {
         item: Object
       },
-      url: function(string){
-        return '/albums/'+string;
+      url: function (string) {
+        return '/albums/' + string;
       },
       date: function (string) {
         return parseInt(string) / 1000;

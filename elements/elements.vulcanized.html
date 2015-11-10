@@ -15337,7 +15337,6 @@ module.exports = Array.isArray || function (arr) {
     .content {
       padding: 48px 62px;
     }
-
   }
 
   /* Material Design Adaptive Breakpoints */
@@ -20911,30 +20910,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 </dom-module>
 <dom-module id="myb-album-item" assetpath="myb-photo/">
-
   <style>
     paper-card {
       margin-bottom: 16px;
-      margin-right: 16px;
-      width: 100%;
-      /*height: 100%;*/
-      /*margin-bottom: 16px;*/
-      /*padding: 0px;*/
-      /*--paper-card-header-color: orange;*/
     }
 
     .title {
       color: var(--default-primary-color);
-      /*font-size: 1.5em;*/
-      /*font-weight: 600;*/
     }
 
     iron-image {
-      /*max-width: 100%;*/
       width: 100%;
       height: 100%;
-      /*min-width: 200px;*/
-      /*min-height: 200px;*/
+      --iron-image-width: 100%;
+      --iron-image-height: 100%;
     }
 
     iron-icon[icon="perm-media"] {
@@ -20946,11 +20935,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <paper-card>
 
       <div class="card-content flex">
-          <a href="{{url(item.gphoto$id.$t)}}">
-        <template is="dom-repeat" items="[[item.media$group.media$content]]" as="photo">
-          <iron-image cross-fade="" preload="" fade="" class="flex" src="{{photo.url}}" width="100%" height="100%"></iron-image>
-        </template>
-          </a>
+        <a href="{{url(item.gphoto$id.$t)}}">
+          <template is="dom-repeat" items="[[item.media$group.media$content]]" as="photo">
+            <iron-image cross-fade="" preload="" fade="" class="flex" src="{{photo.url}}">
+          </iron-image></template>
+        </a>
 
         <div class="title"><h1>{{item.title.$t}}</h1></div>
 
@@ -20989,8 +20978,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       properties: {
         item: Object
       },
-      url: function(string){
-        return '/albums/'+string;
+      url: function (string) {
+        return '/albums/' + string;
       },
       date: function (string) {
         return parseInt(string) / 1000;
@@ -21003,27 +20992,35 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 </dom-module>
 <dom-module id="myb-album-list" assetpath="myb-photo/">
+  <style>
+    myb-album-item {
+      margin-right: 16px;
+      width: 500px;
+    }
+  </style>
+
   <template>
     <iron-ajax auto="" url="{{url(user)}}" handle-as="json" last-response="{{data}}"></iron-ajax>
 
+    <div class="layout horizontal center-justified wrap">
       <template is="dom-repeat" items="[[data.feed.entry]]" as="item">
-          <myb-album-item item="{{item}}"></myb-album-item>
+        <myb-album-item item="{{item}}"></myb-album-item>
       </template>
-
+    </div>
   </template>
 </dom-module>
 
 <script>
-    Polymer({
-      is: 'myb-album-list',
-      properties: {
-        user: String,
-        data: Object
-      },
-      url: function(user){
-          return 'https://picasaweb.google.com/data/feed/api/user/'+user+'?alt=json';
-      }
-    });
+  Polymer({
+    is: 'myb-album-list',
+    properties: {
+      user: String,
+      data: Object
+    },
+    url: function (user) {
+      return 'https://picasaweb.google.com/data/feed/api/user/' + user + '?alt=json';
+    }
+  });
 </script>
 <dom-module id="myb-photo" assetpath="myb-photo/">
   <style>
@@ -21417,25 +21414,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 </dom-module>
 <dom-module id="myb-last-album" assetpath="myb-home/">
-    <template>
-        <iron-ajax auto="" url="{{url(user)}}" handle-as="json" last-response="{{data}}"></iron-ajax>
+  <template>
+    <iron-ajax auto="" url="{{url(user)}}" handle-as="json" last-response="{{data}}"></iron-ajax>
 
-            <myb-album-item item="{{data.feed.entry.0}}"></myb-album-item>
-
-    </template>
+    <myb-album-item item="{{data.feed.entry.0}}"></myb-album-item>
+  </template>
 </dom-module>
 
 <script>
-    Polymer({
-        is: 'myb-last-album',
-        properties: {
-            user: String,
-            data: Object
-        },
-        url: function (user) {
-            return 'https://picasaweb.google.com/data/feed/api/user/' + user + '?alt=json';
-        }
-    });
+  Polymer({
+    is: 'myb-last-album',
+    properties: {
+      user: String,
+      data: Object
+    },
+    url: function (user) {
+      return 'https://picasaweb.google.com/data/feed/api/user/' + user + '?alt=json';
+    }
+  });
 </script>
 <dom-module id="myb-last-video" assetpath="myb-home/">
     <template>
@@ -21455,29 +21451,28 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 </dom-module>
 <dom-module id="myb-home" assetpath="myb-home/">
+  <template>
+    <div class="layout vertical">
+      <paper-button class="self-start">Dernière news</paper-button>
+      <myb-last-news></myb-last-news>
 
-    <template>
+      <paper-button class="self-start">Prochaine prestation</paper-button>
+      <myb-last-performance></myb-last-performance>
 
-        <paper-button>Dernière news</paper-button>
-        <myb-last-news></myb-last-news>
+      <paper-button class="self-start">Dernier album photo</paper-button>
+      <myb-last-album user="mouvyourweb"></myb-last-album>
 
-        <paper-button>Prochaine prestation</paper-button>
-        <myb-last-performance></myb-last-performance>
+      <paper-button class="self-start">Dernière vidéo</paper-button>
+      <myb-last-video></myb-last-video>
+    </div>
 
-        <paper-button>Dernier album photo</paper-button>
-        <myb-last-album user="mouvyourweb"></myb-last-album>
+  </template>
 
-        <paper-button>Dernière vidéo</paper-button>
-        <myb-last-video></myb-last-video>
-
-    </template>
-
-    <script>
-        Polymer({
-            is: 'myb-home',
-        });
-    </script>
-
+  <script>
+    Polymer({
+      is: 'myb-home'
+    });
+  </script>
 </dom-module>
 <dom-module id="myb-last-performance" assetpath="myb-home/">
   <template>

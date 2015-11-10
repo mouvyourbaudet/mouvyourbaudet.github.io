@@ -1,39 +1,29 @@
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="myb-last-news.html">
 <link rel="import" href="myb-last-album.html">
 <link rel="import" href="myb-last-video.html">
 
 <dom-module id="myb-home">
+  <template>
+    <div class="layout vertical">
+      <paper-button class="self-start">Dernière news</paper-button>
+      <myb-last-news></myb-last-news>
 
-    <template>
+      <paper-button class="self-start">Prochaine prestation</paper-button>
+      <myb-last-performance></myb-last-performance>
 
-        <paper-button>Dernière news</paper-button>
-        <myb-last-news></myb-last-news>
+      <paper-button class="self-start">Dernier album photo</paper-button>
+      <myb-last-album user="mouvyourweb"></myb-last-album>
 
-        <paper-button>Prochaine prestation</paper-button>
-        <myb-last-performance></myb-last-performance>
+      <paper-button class="self-start">Dernière vidéo</paper-button>
+      <myb-last-video></myb-last-video>
+    </div>
 
-        <paper-button>Dernier album photo</paper-button>
-        <myb-last-album user="mouvyourweb"></myb-last-album>
+  </template>
 
-        <paper-button>Dernière vidéo</paper-button>
-        <myb-last-video></myb-last-video>
-
-    </template>
-
-    <script>
-        Polymer({
-            is: 'myb-home',
-        });
-    </script>
-
+  <script>
+    Polymer({
+      is: 'myb-home'
+    });
+  </script>
 </dom-module>

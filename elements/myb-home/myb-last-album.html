@@ -3,27 +3,26 @@
 <link rel="import" href="../myb-photo/myb-album-item.html">
 
 <dom-module id="myb-last-album">
-    <template>
-        <iron-ajax
-                auto
-                url="{{url(user)}}"
-                handle-as="json"
-                last-response="{{data}}"></iron-ajax>
+  <template>
+    <iron-ajax
+      auto
+      url="{{url(user)}}"
+      handle-as="json"
+      last-response="{{data}}"></iron-ajax>
 
-            <myb-album-item item="{{data.feed.entry.0}}"></myb-album-item>
-
-    </template>
+    <myb-album-item item="{{data.feed.entry.0}}"></myb-album-item>
+  </template>
 </dom-module>
 
 <script>
-    Polymer({
-        is: 'myb-last-album',
-        properties: {
-            user: String,
-            data: Object
-        },
-        url: function (user) {
-            return 'https://picasaweb.google.com/data/feed/api/user/' + user + '?alt=json';
-        }
-    });
+  Polymer({
+    is: 'myb-last-album',
+    properties: {
+      user: String,
+      data: Object
+    },
+    url: function (user) {
+      return 'https://picasaweb.google.com/data/feed/api/user/' + user + '?alt=json';
+    }
+  });
 </script>
