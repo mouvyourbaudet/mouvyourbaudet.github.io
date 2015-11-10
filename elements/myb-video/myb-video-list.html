@@ -3,21 +3,29 @@
 <link rel="import" href="myb-video-item.html">
 
 <dom-module id="myb-video-list">
-    <template>
-        <firebase-collection
-                order-by-child="height"
-                location="https://myb.firebaseio.com/videos"
-                data="{{videos}}"></firebase-collection>
-              <template is="dom-repeat" items="[[videos]]">
-                  <myb-video-item item="[[item]]"></myb-video-item>
-              </template>
+  <style>
+    myb-video-item {
+      width: 400px;
+      margin: 0 16px 16px 0;
+    }
+  </style>
 
-    </template>
+  <template>
+    <firebase-collection
+      order-by-child="height"
+      location="https://myb.firebaseio.com/videos"
+      data="{{videos}}"></firebase-collection>
 
-    <script>
-        Polymer({
-            is: 'myb-video-list'
-        });
-    </script>
+    <div class="layout horizontal center-justified wrap">
+      <template is="dom-repeat" items="[[videos]]">
+        <myb-video-item item="[[item]]"></myb-video-item>
+      </template>
+    </div>
+  </template>
 
+  <script>
+    Polymer({
+      is: 'myb-video-list'
+    });
+  </script>
 </dom-module>

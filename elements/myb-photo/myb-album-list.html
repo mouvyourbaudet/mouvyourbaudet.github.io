@@ -5,7 +5,7 @@
 <dom-module id="myb-album-list">
   <style>
     myb-album-item {
-      width: 500px;
+      width: 400px;
       margin: 0 16px 16px 0;
     }
   </style>
@@ -33,7 +33,7 @@
       data: Object
     },
     url: function (user) {
-      return 'https://picasaweb.google.com/data/feed/api/user/' + user + '?alt=json';
+      return 'https://picasaweb.google.com/data/feed/api/user/' + user + '?alt=json&kind=album';
     }
   });
 </script>
