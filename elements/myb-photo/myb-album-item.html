@@ -8,6 +8,8 @@
 <dom-module id="myb-album-item">
   <style>
     paper-card {
+      height: 100%;
+      width: 100%;
       margin-bottom: 16px;
     }
 
@@ -16,10 +18,8 @@
     }
 
     iron-image {
+      height: 300px;
       width: 100%;
-      height: 100%;
-      --iron-image-width: 100%;
-      --iron-image-height: 100%;
     }
 
     iron-icon[icon="perm-media"] {
@@ -29,42 +29,45 @@
 
   <template>
     <paper-card>
+      <div class="layout vertical">
+        <div class="card-content flex">
+          <div class="layout vertical">
+            <a href="{{url(item.gphoto$id.$t)}}">
+              <template is="dom-repeat" items="[[item.media$group.media$content]]" as="photo">
+                <iron-image cross-fade preload fade src="{{photo.url}}" sizing="cover"></iron-image>
+              </template>
+            </a>
 
-      <div class="card-content flex">
-        <a href="{{url(item.gphoto$id.$t)}}">
-          <template is="dom-repeat" items="[[item.media$group.media$content]]" as="photo">
-            <iron-image cross-fade preload fade class="flex" src="{{photo.url}}"/>
-          </template>
-        </a>
+            <div class="title self-center">
+              <h1>{{item.title.$t}}</h1>
+            </div>
 
-        <div class="title"><h1>{{item.title.$t}}</h1></div>
+            <template is="dom-if" if="{{item.media$group.media$description.$t}}">
+              <span>{{item.media$group.media$description.$t}}</span>
+            </template>
+          </div>
+        </div>
 
-        <template is="dom-if" if="{{item.media$group.media$description.$t}}">
-          <span>{{item.media$group.media$description.$t}}</span>
+        <template is="dom-if" if="{{item.gphoto$numphotos.$t}}">
+          <div class="card-actions">
+            <iron-icon icon="perm-media"></iron-icon>
+            <span class="paper-font-body1">{{item.gphoto$numphotos.$t}}</span>
+            <span class="paper-font-body1"> photos</span>
+          </div>
         </template>
 
+        <template is="dom-if" if="{{item.gphoto$timestamp.$t}}">
+          <div class="card-actions">
+            <myb-date date="{{date(item.gphoto$timestamp.$t)}}"></myb-date>
+          </div>
+        </template>
+
+        <template is="dom-if" if="{{item.gphoto$location.$t}}">
+          <div class="card-actions">
+            <myb-place place="{{item.gphoto$location.$t}}"></myb-place>
+          </div>
+        </template>
       </div>
-
-      <template is="dom-if" if="{{item.gphoto$numphotos.$t}}">
-        <div class="card-actions">
-          <iron-icon icon="perm-media"></iron-icon>
-          <span class="paper-font-body1">{{item.gphoto$numphotos.$t}}</span>
-          <span class="paper-font-body1"> photos</span>
-        </div>
-      </template>
-
-      <template is="dom-if" if="{{item.gphoto$timestamp.$t}}">
-        <div class="card-actions">
-          <myb-date date="{{date(item.gphoto$timestamp.$t)}}"></myb-date>
-        </div>
-      </template>
-
-      <template is="dom-if" if="{{item.gphoto$location.$t}}">
-        <div class="card-actions">
-          <myb-place place="{{item.gphoto$location.$t}}"></myb-place>
-        </div>
-      </template>
-
     </paper-card>
   </template>
 
