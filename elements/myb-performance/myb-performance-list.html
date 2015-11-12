@@ -16,13 +16,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <template>
     <firebase-collection
             order-by-child="height"
-            limit-to-first="3"
             location="https://myb.firebaseio.com/performances"
             data="{{performances}}"></firebase-collection>
+    <paper-material elevation="1">
+    <div class="list" role="list">
     <template is="dom-repeat" items="[[performances]]" as="item">
       <myb-performance-item item="{{item}}"></myb-performance-item>
       </template>
-
+    </div>
+    </paper-material>
   </template>
 
   <script>

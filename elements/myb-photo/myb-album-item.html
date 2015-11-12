@@ -12,13 +12,34 @@
       width: 100%;
     }
 
+    .card-content {
+      padding: 0;
+    }
+
+    .cover {
+      position: relative;
+    }
+
+    .cover a {
+      height: 300px;
+    }
+
     .title {
-      text-align: center;
-      color: var(--default-primary-color);
+      padding: 10px;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: #fff;
+      font-size: 18px;
+      background-color: rgba(0, 0, 0, 0.5);
     }
 
     iron-image {
-      height: 300px;
+      height: 100%;
       width: 100%;
     }
 
@@ -31,7 +52,7 @@
     <paper-card>
       <div class="layout vertical">
         <div class="card-content flex">
-          <div class="layout vertical">
+          <div class="cover layout vertical">
             <a href="{{url(item.gphoto$id.$t)}}">
               <template is="dom-repeat" items="[[item.media$group.media$content]]" as="photo">
                 <iron-image cross-fade preload fade src="{{photo.url}}" sizing="cover"></iron-image>
@@ -39,7 +60,7 @@
             </a>
 
             <div class="title">
-              <h1>{{item.title.$t}}</h1>
+              {{item.title.$t}}
             </div>
 
             <template is="dom-if" if="{{item.media$group.media$description.$t}}">

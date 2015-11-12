@@ -7,18 +7,24 @@
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 
 <dom-module id="myb-song-list">
+  <style>
+    paper-card {
+      width: 100%;
+    }
+  </style>
   <template>
     <firebase-collection
       order-by-child="height"
       location="https://myb.firebaseio.com/songs"
       data="{{songs}}"></firebase-collection>
-    <paper-material elevation="1">
+    <paper-card elevation="1">
+      <div class="card-content">Voici les morceaux originaux qui ont inspiré le répertoire Mouv' Your Baudet (non exhaustif !) :</div>
       <div class="list" role="list">
         <template is="dom-repeat" items="[[songs]]">
           <myb-song-item item="[[item]]"></myb-song-item>
         </template>
       </div>
-    </paper-material>
+    </paper-card>
 
   </template>
 

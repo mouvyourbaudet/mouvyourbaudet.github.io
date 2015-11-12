@@ -19,9 +19,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             limit-to-first="1"
             location="https://myb.firebaseio.com/performances"
             data="{{performances}}"></firebase-collection>
+    <paper-material>
     <template is="dom-repeat" items="[[performances]]" as="item">
       <myb-performance-item item="{{item}}"></myb-performance-item>
       </template>
+    </paper-material>
 
   </template>
 

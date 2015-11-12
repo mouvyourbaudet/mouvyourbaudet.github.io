@@ -11,7 +11,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
 <script src='../../bower_components/moment/min/moment-with-locales.min.js'></script>
 
-<dom-module id="myb-date">
+<dom-module id="myb-period">
   <style>
       iron-icon[icon="query-builder"] {
           color: var(--accent-color);
@@ -20,31 +20,36 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <template>
         <iron-icon icon="query-builder"></iron-icon>
-       <span class="paper-font-body1">{{dateToString}}</span>
+       <span class="paper-font-body1">Du [[startDateToString]] au [[endDateToString]]</span>
   </template>
 
   <script>
     Polymer({
-      is: 'myb-date',
+      is: 'myb-period',
       properties: {
-        date: {
+        startDate: {
           type: String,
           value: 'Aucune date'
         },
-        dateToString: {
+        endDate: {
           type: String,
-          computed: 'toString(date)'
+          value: 'Aucune date'
+        },
+        startDateToString: {
+          type: String,
+          computed: 'toString(startDate)'
+        },
+        endDateToString: {
+          type: String,
+          computed: 'toString(endDate)'
         }
       },
       toString: function (timestamp) {
         var locale = window.navigator.userLanguage || window.navigator.language;
 
-        return this.capitalize(moment.unix(timestamp)
+        return moment.unix(timestamp)
           .locale(locale)
-          .format('LLLL'));
-      },
-      capitalize: function(s){
-        return s && s[0].toUpperCase() + s.slice(1);
+          .format('LLLL');
       }
     });
   </script>

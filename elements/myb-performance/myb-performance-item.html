@@ -3,6 +3,7 @@
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../myb-place/myb-place.html">
 <link rel="import" href="../myb-date/myb-date.html">
+<link rel="import" href="../myb-date/myb-period.html">
 
 <dom-module id="myb-performance-item">
 
@@ -12,39 +13,61 @@
             margin-bottom: 16px;
             --paper-card-header-color: var(--default-primary-color);
         }
-      .image{
-        display: inline-block;
+        .avatar {
+          display: inline-block;
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          overflow: hidden;
+          background: var(--text-primary-color);
+          margin: 20px;
+        }
+        .avatar-blank {
+          display: inline-block;
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          overflow: hidden;
+          background: var(--light-primary-color);
+          margin: 20px;
+        }
+
+        .iconAccent {
+          fill: var(--accent-color);
+          padding-right: 3px;
+          width: 20px;
+          height: 20px;
+        }
+
+      .title {
+        color : var(--default-primary-color);
+        font-weight: 600;
+        font-size: 1.4em;
       }
     </style>
 
-    <template>
-        <paper-card heading="{{item.title}}">
-            <div class="card-content">
+  <template>
 
-              <template is="dom-if" if="{{item.image}}">
-                <a href="{{item.image}}" class="image" target="_blank">
-                  <img src="{{item.image}}" height="100px">
-                </a>
-              </template>
+    <paper-item>
+      <template is="dom-if" if="[[item.image]]">
+        <img class="avatar" src="[[item.image]]">
+      </template>
+      <template is="dom-if" if="[[!item.image]]">
+        <div class="avatar-blank">
+        </div>
+      </template>
+      <paper-item-body two-line class="layout vertical">
+        <div class="title">[[item.title]]</div>
+        <div>
+          <myb-period start-date="{{item.startDate}}" end-date="{{item.endDate}}" size="min"></myb-period>
+        </div>
+        <div>
+          <myb-place place="{{item.place}}"></myb-place>
+        </div>
+      </paper-item-body>
+    </paper-item>
 
-
-              <span>{{item.content}}</span></div>
-
-            <div class="card-actions">
-                <myb-date date="{{item.startDate}}"></myb-date>
-            </div>
-            <template is="dom-if" if="{{item.endDate}}">
-            <div class="card-actions">
-                <myb-date date="{{item.endDate}}"></myb-date>
-            </div>
-              </template>
-            <template is="dom-if" if="{{item.place}}">
-            <div class="card-actions">
-                <myb-place place="{{item.place}}"></myb-place>
-            </div>
-            </template>
-        </paper-card>
-    </template>
+</template>
 
     <script>
         Polymer({
