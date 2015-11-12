@@ -20636,9 +20636,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       width: 100%;
     }
 
+    .card-content {
+      padding: 0;
+    }
+
     .title {
-      text-align: center;
-      color: var(--default-primary-color);
+      padding: 10px;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: #fff;
+      font-size: 18px;
+      background-color: rgba(0, 0, 0, 0.8);
     }
   </style>
 
@@ -20647,11 +20660,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <div class="card-content">
         <google-youtube video-id="{{item.url}}" width="100%" rel="0" start="0" autoplay="0" class="flex">
         </google-youtube>
-        <div class="title"><h1>{{item.title}}</h1></div>
-        <template is="dom-if" if="{{item.content}}">
-          <span>{{item.content}}</span>
-        </template>
 
+        <div class="title">
+          {{item.title}}
+        </div>
       </div>
 
       <div class="card-actions">
