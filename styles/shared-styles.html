@@ -3,6 +3,65 @@
         @apply(--paper-font-display2);
       }
 
+      .logo {
+        height: 32px;
+        width: 43px;
+        padding-right: 12px;
+      }
+
+      .toolbar {
+        background: transparent;
+      }
+
+      paper-menu a > *, paper-menu paper-item > *, paper-menu paper-icon-item > * {
+        pointer-events: none;
+      }
+
+      paper-scroll-header-panel.home::shadow #headerBg {
+        background-image: url('/images/background/home.jpg');
+      }
+
+      paper-scroll-header-panel.news::shadow #headerBg {
+        background-image: url('/images/background/news.jpg');
+      }
+
+      paper-scroll-header-panel.introduction::shadow #headerBg {
+        background-image: url('/images/background/introduction.jpg');
+      }
+
+      paper-scroll-header-panel.songs::shadow #headerBg {
+        background-image: url('/images/background/songs.jpg');
+      }
+
+      paper-scroll-header-panel.performances::shadow #headerBg {
+        background-image: url('/images/background/performances.jpg');
+      }
+
+      paper-scroll-header-panel.albums::shadow #headerBg {
+        background-image: url('/images/background/albums.jpg');
+      }
+
+      paper-scroll-header-panel.videos::shadow #headerBg {
+        background-image: url('/images/background/videos.jpg');
+      }
+
+      paper-scroll-header-panel.friends::shadow #headerBg {
+        background-image: url('/images/background/friends.jpg');
+        filter: brightness(0.5)
+      }
+
+      paper-scroll-header-panel.contact::shadow #headerBg {
+        background-image: url('/images/background/contact.jpg');
+      }
+
+      paper-scroll-header-panel.error404::shadow #headerBg {
+        background-image: url('/images/background/404.jpg');
+      }
+
+      paper-scroll-header-panel::shadow #condensedHeaderBg {
+        background-color: var(--default-primary-color);
+      }
+
       @media (max-width: 600px) {
         .page-title {
           font-size: 24px!important;

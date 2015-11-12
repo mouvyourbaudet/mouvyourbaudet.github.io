@@ -58,18 +58,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       app.background = 'performances';
     });
 
-    page('/albums', scrollToTop, function() {
+    page('/albums/:album?', scrollToTop, function(data) {
       app.route = 'albums';
       app.title = 'Photos';
       app.subtitle = 'Mouv\' your Baudet';
       app.background = 'albums';
-    });
-
-    page('/albums/:album', scrollToTop, function(data) {
-      app.route = 'photos';
-      app.title = 'Photos';
-      app.subtitle = 'Mouv\' your Baudet';
-      app.background = 'photos';
       app.params = data.params;
     });
 

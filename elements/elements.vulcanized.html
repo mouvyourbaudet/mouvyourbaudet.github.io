@@ -15084,18 +15084,11 @@ module.exports = Array.isArray || function (arr) {
       app.background = 'performances';
     });
 
-    page('/albums', scrollToTop, function() {
+    page('/albums/:album?', scrollToTop, function(data) {
       app.route = 'albums';
       app.title = 'Photos';
       app.subtitle = 'Mouv\' your Baudet';
       app.background = 'albums';
-    });
-
-    page('/albums/:album', scrollToTop, function(data) {
-      app.route = 'photos';
-      app.title = 'Photos';
-      app.subtitle = 'Mouv\' your Baudet';
-      app.background = 'photos';
       app.params = data.params;
     });
 
@@ -15153,26 +15146,6 @@ module.exports = Array.isArray || function (arr) {
   /* Application theme */
 
   :root {
-    /*--dark-primary-color: #303F9F;*/
-    /*--default-primary-color: #3F51B5;*/
-    /*--light-primary-color: #C5CAE9;*/
-    /*--text-primary-color: #ffffff; /!*text/icons*!/*/
-    /*--accent-color: #FF4081;*/
-    /*--primary-background-color: #c5cae9;*/
-    /*--primary-text-color: #212121;*/
-    /*--secondary-text-color: #727272;*/
-    /*--disabled-text-color: #bdbdbd;*/
-    /*--divider-color: #B6B6B6;*/
-    /*--dark-primary-color: #212121;*/
-    /*--default-primary-color: #424242;*/
-    /*--light-primary-color: #616161;*/
-    /*--text-primary-color: #ffffff; /!*text/icons*!/*/
-    /*--accent-color: #f57c00;*/
-    /*--primary-background-color: #757575;*/
-    /*--primary-text-color: #212121;*/
-    /*--secondary-text-color: #727272;*/
-    /*--disabled-text-color: #bdbdbd;*/
-    /*--divider-color: #B6B6B6;*/
     --dark-primary-color:       #263238;
     --default-primary-color:    #37474F;
     --light-primary-color:      #CFD8DC;
@@ -15183,19 +15156,15 @@ module.exports = Array.isArray || function (arr) {
     --secondary-text-color:     #727272;
     --disabled-text-color:      #BDBDBD;
     --divider-color:            #B6B6B6;
+
     /* Components */
 
     /* paper-drawer-panel */
-    /*--drawer-menu-color: #ffffff;*/
-    /*--drawer-border-color: 1px solid #ccc;*/
-    /*--drawer-toolbar-border-color: 1px solid rgba(0, 0, 0, 0.22);*/
     --drawer-menu-color:           #ffffff;
     --drawer-border-color:         1px solid #ccc;
     --drawer-toolbar-border-color: 1px solid rgba(0, 0, 0, 0.22);
 
     /* paper-menu */
-    /*--paper-menu-background-color: #fff;*/
-    /*--menu-link-color: #111111;*/
     --paper-menu-background-color: #fff;
     --menu-link-color:             #111111;
 
@@ -15226,12 +15195,17 @@ module.exports = Array.isArray || function (arr) {
     background: white;
   }
 
+  paper-menu {
+    padding: 0;
+  }
+
   paper-menu iron-icon {
     margin-right: 33px;
     opacity: 0.54;
   }
 
   .paper-menu > .iron-selected {
+    background-color: var(--light-primary-color);
     color: var(--default-primary-color);
   }
 
@@ -15255,6 +15229,10 @@ module.exports = Array.isArray || function (arr) {
     line-height: 24px;
     min-height: 48px;
     padding: 0 16px;
+  }
+
+  paper-menu a:focus:after {
+    background: none;
   }
 
   paper-toolbar.tall .app-name {
@@ -20376,6 +20354,65 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <dom-module id="shared-styles" assetpath="../styles/"><template><style>
       .page-title {
         @apply(--paper-font-display2);
+      }
+
+      .logo {
+        height: 32px;
+        width: 43px;
+        padding-right: 12px;
+      }
+
+      .toolbar {
+        background: transparent;
+      }
+
+      paper-menu a > *, paper-menu paper-item > *, paper-menu paper-icon-item > * {
+        pointer-events: none;
+      }
+
+      paper-scroll-header-panel.home::shadow #headerBg {
+        background-image: url("/images/background/home.jpg");
+      }
+
+      paper-scroll-header-panel.news::shadow #headerBg {
+        background-image: url("/images/background/news.jpg");
+      }
+
+      paper-scroll-header-panel.introduction::shadow #headerBg {
+        background-image: url("/images/background/introduction.jpg");
+      }
+
+      paper-scroll-header-panel.songs::shadow #headerBg {
+        background-image: url("/images/background/songs.jpg");
+      }
+
+      paper-scroll-header-panel.performances::shadow #headerBg {
+        background-image: url("/images/background/performances.jpg");
+      }
+
+      paper-scroll-header-panel.albums::shadow #headerBg {
+        background-image: url("/images/background/albums.jpg");
+      }
+
+      paper-scroll-header-panel.videos::shadow #headerBg {
+        background-image: url("/images/background/videos.jpg");
+      }
+
+      paper-scroll-header-panel.friends::shadow #headerBg {
+        background-image: url("/images/background/friends.jpg");
+        filter: brightness(0.5)
+      }
+
+      paper-scroll-header-panel.contact::shadow #headerBg {
+        background-image: url("/images/background/contact.jpg");
+      }
+
+      paper-scroll-header-panel.error404::shadow #headerBg {
+        background-image: url("/images/background/404.jpg");
+      }
+
+      paper-scroll-header-panel::shadow #condensedHeaderBg {
+        background-color: var(--default-primary-color);
       }
 
       @media (max-width: 600px) {
