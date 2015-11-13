@@ -20451,6 +20451,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         pointer-events: none;
       }
 
+      paper-scroll-header-panel::shadow #headerBg {
+        background-color: var(--default-primary-color);
+      }
+
       paper-scroll-header-panel.home::shadow #headerBg {
         background-image: url("/images/background/home.jpg");
       }
@@ -21202,7 +21206,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       data: Object
     },
     url: function (user) {
-      return 'https://picasaweb.google.com/data/feed/api/user/' + user + '?alt=json&kind=album';
+      return 'https://picasaweb.google.com/data/feed/api/user/' + user + '?alt=json&kind=album&imgmax=400u';
     }
   });
 </script>
@@ -21512,6 +21516,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </style>
   <template>
 
+
     <paper-card elevation="1" heading="Histoire">
       <div class="card-content">Tatiana arriva au local de répétition vers 21 h, habillée très sexy. Elle avait pris
         soin de prendre un long
@@ -21632,7 +21637,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       data: Object
     },
     url: function (user) {
-      return 'https://picasaweb.google.com/data/feed/api/user/' + user + '?alt=json&max-results=1&kind=album';
+      return 'https://picasaweb.google.com/data/feed/api/user/' + user + '?alt=json&max-results=1&kind=album&imgmax=400u';
     }
   });
 </script>
