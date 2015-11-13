@@ -15,13 +15,10 @@
       margin: 20px;
     }
 
-    .friend-link {
+    a, a:visited {
+      text-decoration: none;
       color: var(--default-primary-color);
       font-weight: 600;
-    }
-
-    a:-webkit-any-link {
-      text-decoration: none;
     }
 
     .iconAccent {
@@ -50,7 +47,7 @@
               <div secondary>[[item.description]]</div>
               <div secondary>
                 <iron-icon icon="icons:cloud-circle" class="iconAccent"></iron-icon>
-                <a href="{{item.url}}" target="_blank"><span class="friend-link">[[item.url]]</span></a></div>
+                <a href="{{item.url}}" target="_blank">[[item.url]]</a></div>
             </paper-item-body>
           </paper-item>
         </template>

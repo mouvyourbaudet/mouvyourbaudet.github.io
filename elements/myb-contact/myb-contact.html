@@ -9,95 +9,96 @@
 <link rel="import" href="myb-contact-plus.html">
 
 <dom-module id="myb-contact">
-    <style>
-        paper-card {
-            width: 100%;
-            margin-bottom: 16px;
-            --paper-card-header-color: var(--default-primary-color);
-            padding: 0px;
-        }
+  <style>
+    paper-card {
+      width: 100%;
+      margin-bottom: 16px;
+      --paper-card-header-color: var(--default-primary-color);
+      padding: 0px;
+    }
 
-        .contact-link {
-            color: var(--default-primary-color);
-            font-weight: 600;
-        }
+    a, a:visited {
+      color: var(--default-primary-color);
+      font-weight: 600;
+      text-decoration: none;
+    }
 
-        a:-webkit-any-link {
-            text-decoration: none;
-        }
+    .iconAccent {
+      fill: var(--accent-color);
+      padding-right: 14px;
+    }
+  </style>
+  <template>
+    <paper-card elevation="1" heading="Contacter la fanfare">
+      <div class="card-content">
 
-        .iconAccent {
-            fill: var(--accent-color);
-            padding-right: 14px;
-        }
-    </style>
-    <template>
-        <paper-card elevation="1" heading="Contacter la fanfare">
-            <div class="card-content">
-
-                <paper-item>
-                    <iron-icon icon="communication:phone" class="iconAccent"></iron-icon>
-                    <paper-item-body two-line class="layout vertical">
-                        <div>Par téléphone :
-                            <a href="tel:+33632784290"><span class="contact-link">06.32.78.42.90</span></a>
-                        </div>
-                    </paper-item-body>
-                </paper-item>
-
-                <paper-item>
-                    <iron-icon icon="mail" class="iconAccent"></iron-icon>
-                    <paper-item-body two-line class="layout vertical">
-                        <div>Par e-mail :
-                            <a href="mailto:mouvyourbaudet@gmail.com"><span class="contact-link">mouvyourbaudet@gmail.com</span></a>
-                        </div>
-                    </paper-item-body>
-                </paper-item>
-
+        <paper-item>
+          <iron-icon icon="communication:phone" class="iconAccent"></iron-icon>
+          <paper-item-body two-line class="layout vertical">
+            <div>Par téléphone :
+              <a href="tel:+33632784290">
+                06.32.78.42.90
+              </a>
             </div>
-        </paper-card>
+          </paper-item-body>
+        </paper-item>
 
-        <paper-card elevation="1" heading="Nous suivre sur les réseaux sociaux">
-            <div class="card-content">
-                <paper-item>
-                    <iron-icon icon="myb-contact-facebook:fb" class="iconAccent"></iron-icon>
-                    <paper-item-body two-line class="layout vertical">
-                        <div>Facebook :
-                            <a href="https://www.facebook.com/MouvyourBaudet" target="_blank">
-                                <span class="contact-link">https://www.facebook.com/MouvyourBaudet</span>
-                            </a>
-                        </div>
-                    </paper-item-body>
-                </paper-item>
-
-                <paper-item>
-                    <iron-icon icon="myb-contact-google:plus" class="iconAccent"></iron-icon>
-                    <paper-item-body two-line class="layout vertical">
-                        <div>Google+ :
-                            <a href="https://plus.google.com/106568992331939704697" target="_blank">
-                                <span class="contact-link">https://plus.google.com/106568992331939704697</span>
-                            </a>
-                        </div>
-                    </paper-item-body>
-                </paper-item>
-
-                <paper-item>
-                    <iron-icon icon="myb-contact-soundcloud:sc" class="iconAccent"></iron-icon>
-                    <paper-item-body two-line class="layout vertical">
-                        <div>SoundCloud :
-                            <a href="https://soundcloud.com/mouvyourbaudet" target="_blank">
-                                <span class="contact-link">https://soundcloud.com/mouvyourbaudet</span>
-                            </a>
-                        </div>
-                    </paper-item-body>
-                </paper-item>
+        <paper-item>
+          <iron-icon icon="mail" class="iconAccent"></iron-icon>
+          <paper-item-body two-line class="layout vertical">
+            <div>Par e-mail :
+              <a href="mailto:mouvyourbaudet@gmail.com">
+                mouvyourbaudet@gmail.com
+              </a>
             </div>
-        </paper-card>
-    </template>
+          </paper-item-body>
+        </paper-item>
 
-    <script>
-        Polymer({
-            is: 'myb-contact'
-        });
-    </script>
+      </div>
+    </paper-card>
+
+    <paper-card elevation="1" heading="Nous suivre sur les réseaux sociaux">
+      <div class="card-content">
+        <paper-item>
+          <iron-icon icon="myb-contact-facebook:fb" class="iconAccent"></iron-icon>
+          <paper-item-body two-line class="layout vertical">
+            <div>Facebook :
+              <a href="https://www.facebook.com/MouvyourBaudet" target="_blank">
+                https://www.facebook.com/MouvyourBaudet
+              </a>
+            </div>
+          </paper-item-body>
+        </paper-item>
+
+        <paper-item>
+          <iron-icon icon="myb-contact-google:plus" class="iconAccent"></iron-icon>
+          <paper-item-body two-line class="layout vertical">
+            <div>Google+ :
+              <a href="https://plus.google.com/106568992331939704697" target="_blank">
+                https://plus.google.com/106568992331939704697
+              </a>
+            </div>
+          </paper-item-body>
+        </paper-item>
+
+        <paper-item>
+          <iron-icon icon="myb-contact-soundcloud:sc" class="iconAccent"></iron-icon>
+          <paper-item-body two-line class="layout vertical">
+            <div>SoundCloud :
+              <a href="https://soundcloud.com/mouvyourbaudet" target="_blank">
+                https://soundcloud.com/mouvyourbaudet
+              </a>
+            </div>
+          </paper-item-body>
+        </paper-item>
+      </div>
+    </paper-card>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'myb-contact'
+    });
+  </script>
 
 </dom-module>

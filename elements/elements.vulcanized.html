@@ -21020,13 +21020,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       margin: 20px;
     }
 
-    .friend-link {
+    a, a:visited {
+      text-decoration: none;
       color: var(--default-primary-color);
       font-weight: 600;
-    }
-
-    a:-webkit-any-link {
-      text-decoration: none;
     }
 
     .iconAccent {
@@ -21052,7 +21049,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               <div secondary="">[[item.description]]</div>
               <div secondary="">
                 <iron-icon icon="icons:cloud-circle" class="iconAccent"></iron-icon>
-                <a href="{{item.url}}" target="_blank"><span class="friend-link">[[item.url]]</span></a></div>
+                <a href="{{item.url}}" target="_blank">[[item.url]]</a></div>
             </paper-item-body>
           </paper-item>
         </template>
@@ -21408,96 +21405,97 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </g>
     </svg>
 </iron-iconset-svg><dom-module id="myb-contact" assetpath="myb-contact/">
-    <style>
-        paper-card {
-            width: 100%;
-            margin-bottom: 16px;
-            --paper-card-header-color: var(--default-primary-color);
-            padding: 0px;
-        }
+  <style>
+    paper-card {
+      width: 100%;
+      margin-bottom: 16px;
+      --paper-card-header-color: var(--default-primary-color);
+      padding: 0px;
+    }
 
-        .contact-link {
-            color: var(--default-primary-color);
-            font-weight: 600;
-        }
+    a, a:visited {
+      color: var(--default-primary-color);
+      font-weight: 600;
+      text-decoration: none;
+    }
 
-        a:-webkit-any-link {
-            text-decoration: none;
-        }
+    .iconAccent {
+      fill: var(--accent-color);
+      padding-right: 14px;
+    }
+  </style>
+  <template>
+    <paper-card elevation="1" heading="Contacter la fanfare">
+      <div class="card-content">
 
-        .iconAccent {
-            fill: var(--accent-color);
-            padding-right: 14px;
-        }
-    </style>
-    <template>
-        <paper-card elevation="1" heading="Contacter la fanfare">
-            <div class="card-content">
-
-                <paper-item>
-                    <iron-icon icon="communication:phone" class="iconAccent"></iron-icon>
-                    <paper-item-body two-line="" class="layout vertical">
-                        <div>Par téléphone :
-                            <a href="tel:+33632784290"><span class="contact-link">06.32.78.42.90</span></a>
-                        </div>
-                    </paper-item-body>
-                </paper-item>
-
-                <paper-item>
-                    <iron-icon icon="mail" class="iconAccent"></iron-icon>
-                    <paper-item-body two-line="" class="layout vertical">
-                        <div>Par e-mail :
-                            <a href="mailto:mouvyourbaudet@gmail.com"><span class="contact-link">mouvyourbaudet@gmail.com</span></a>
-                        </div>
-                    </paper-item-body>
-                </paper-item>
-
+        <paper-item>
+          <iron-icon icon="communication:phone" class="iconAccent"></iron-icon>
+          <paper-item-body two-line="" class="layout vertical">
+            <div>Par téléphone :
+              <a href="tel:+33632784290">
+                06.32.78.42.90
+              </a>
             </div>
-        </paper-card>
+          </paper-item-body>
+        </paper-item>
 
-        <paper-card elevation="1" heading="Nous suivre sur les réseaux sociaux">
-            <div class="card-content">
-                <paper-item>
-                    <iron-icon icon="myb-contact-facebook:fb" class="iconAccent"></iron-icon>
-                    <paper-item-body two-line="" class="layout vertical">
-                        <div>Facebook :
-                            <a href="https://www.facebook.com/MouvyourBaudet" target="_blank">
-                                <span class="contact-link">https://www.facebook.com/MouvyourBaudet</span>
-                            </a>
-                        </div>
-                    </paper-item-body>
-                </paper-item>
-
-                <paper-item>
-                    <iron-icon icon="myb-contact-google:plus" class="iconAccent"></iron-icon>
-                    <paper-item-body two-line="" class="layout vertical">
-                        <div>Google+ :
-                            <a href="https://plus.google.com/106568992331939704697" target="_blank">
-                                <span class="contact-link">https://plus.google.com/106568992331939704697</span>
-                            </a>
-                        </div>
-                    </paper-item-body>
-                </paper-item>
-
-                <paper-item>
-                    <iron-icon icon="myb-contact-soundcloud:sc" class="iconAccent"></iron-icon>
-                    <paper-item-body two-line="" class="layout vertical">
-                        <div>SoundCloud :
-                            <a href="https://soundcloud.com/mouvyourbaudet" target="_blank">
-                                <span class="contact-link">https://soundcloud.com/mouvyourbaudet</span>
-                            </a>
-                        </div>
-                    </paper-item-body>
-                </paper-item>
+        <paper-item>
+          <iron-icon icon="mail" class="iconAccent"></iron-icon>
+          <paper-item-body two-line="" class="layout vertical">
+            <div>Par e-mail :
+              <a href="mailto:mouvyourbaudet@gmail.com">
+                mouvyourbaudet@gmail.com
+              </a>
             </div>
-        </paper-card>
-    </template>
+          </paper-item-body>
+        </paper-item>
 
-    <script>
-        Polymer({
-            is: 'myb-contact'
-        });
-    </script>
+      </div>
+    </paper-card>
+
+    <paper-card elevation="1" heading="Nous suivre sur les réseaux sociaux">
+      <div class="card-content">
+        <paper-item>
+          <iron-icon icon="myb-contact-facebook:fb" class="iconAccent"></iron-icon>
+          <paper-item-body two-line="" class="layout vertical">
+            <div>Facebook :
+              <a href="https://www.facebook.com/MouvyourBaudet" target="_blank">
+                https://www.facebook.com/MouvyourBaudet
+              </a>
+            </div>
+          </paper-item-body>
+        </paper-item>
+
+        <paper-item>
+          <iron-icon icon="myb-contact-google:plus" class="iconAccent"></iron-icon>
+          <paper-item-body two-line="" class="layout vertical">
+            <div>Google+ :
+              <a href="https://plus.google.com/106568992331939704697" target="_blank">
+                https://plus.google.com/106568992331939704697
+              </a>
+            </div>
+          </paper-item-body>
+        </paper-item>
+
+        <paper-item>
+          <iron-icon icon="myb-contact-soundcloud:sc" class="iconAccent"></iron-icon>
+          <paper-item-body two-line="" class="layout vertical">
+            <div>SoundCloud :
+              <a href="https://soundcloud.com/mouvyourbaudet" target="_blank">
+                https://soundcloud.com/mouvyourbaudet
+              </a>
+            </div>
+          </paper-item-body>
+        </paper-item>
+      </div>
+    </paper-card>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'myb-contact'
+    });
+  </script>
 
 </dom-module>
 <dom-module id="myb-introduction" assetpath="myb-introduction/">
@@ -21507,10 +21505,38 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       margin-bottom: 16px;
       --paper-card-header-color: var(--default-primary-color);
     }
+
+    .card-content {
+      text-align: justify;
+    }
   </style>
   <template>
+    <paper-card elevation="1">
+      <div class="card-content">
+        Née en 2009 à en terre Poitevine, la fanfare Mouv' your Baudet fête cette année ses [[year]] ans.
+      </div>
+      <div class="card-content">
+        Elle compte une quinzaine de membres, répartis entre différents pupitres : trompette, trombone, basse, souba, ou
+        encore percu.
+      </div>
+      <div class="card-content">
+        Son répertoire est très varié et est inspiré de différents style : disco, pop, rock, métal, valse, slow, techno,
+        variété française et internationale, bal-musette pour moine périgourdin unijmabiste, etc.
+      </div>
+      <div class="card-content">
+        <p>La fanfare Mouv' your Baudet vous propose ses services pour animer tout type de prestation :
+        <br>- mariage
+          <br>- divorce
+          <br>- aniversaire de maison de retraite
+          <br>- fêtes de village
+          <br>- bar mitsva
+          <br>(liste non exaustive !)</p>
+      </div>
+    </paper-card>
+
     <paper-card elevation="1" heading="Histoire">
-      <div class="card-content">Tatiana arriva au local de répétition vers 21 h, habillée très sexy. Elle avait pris soin de prendre un long
+      <div class="card-content">Tatiana arriva au local de répétition vers 21 h, habillée très sexy. Elle avait pris
+        soin de prendre un long
         bain parfumé à la patate douce et au piment oiseau d'Ardin (banlieue chic de Los Angeles). Elle savait le
         mélange à la hauteur de la variété du répertoire. Suave mais tonique.
         Après un court rituel d'embrassades toutes en retenue (23h20), Tatiana dégrafa son caraco-shorty pour mieux se
@@ -21547,7 +21573,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <script>
     Polymer({
-      is: 'myb-introduction'
+      is: 'myb-introduction',
+      properties: {
+        year: {
+          type: Number,
+          value: new Date().getFullYear() - 2009
+        }
+      }
     });
   </script>
 
