@@ -20917,53 +20917,58 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 </dom-module>
 <dom-module id="myb-performance-item" assetpath="myb-performance/">
 
-    <style>
-        paper-card {
-            width: 100%;
-            margin-bottom: 16px;
-            --paper-card-header-color: var(--default-primary-color);
-        }
-        paper-item {
-          padding: 0px 0px 0px 0px;
-        }
-        .avatar {
-          display: inline-block;
-          width: 60px;
-          height: 60px;
-          border-radius: 50%;
-          overflow: hidden;
-          background: var(--text-primary-color);
-          margin: 20px;
-        }
-        .avatar-blank {
-          display: inline-block;
-          width: 60px;
-          height: 60px;
-          border-radius: 50%;
-          overflow: hidden;
-          background: var(--light-primary-color);
-          margin: 20px;
-        }
+  <style>
+    paper-card {
+      width: 100%;
+      margin-bottom: 16px;
+      --paper-card-header-color: var(--default-primary-color);
+    }
 
-        .iconAccent {
-          fill: var(--accent-color);
-          padding-right: 3px;
-          width: 20px;
-          height: 20px;
-        }
+    paper-item {
+      padding: 0px 0px 0px 0px;
+    }
 
-      .title {
-        color : var(--default-primary-color);
-        font-weight: 600;
-        font-size: 1.4em;
-      }
-    </style>
+    .avatar {
+      display: inline-block;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: var(--text-primary-color);
+      margin: 20px;
+    }
+
+    .avatar-blank {
+      display: inline-block;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: var(--light-primary-color);
+      margin: 20px;
+    }
+
+    .iconAccent {
+      fill: var(--accent-color);
+      padding-right: 3px;
+      width: 20px;
+      height: 20px;
+    }
+
+    .title {
+      color: var(--default-primary-color);
+      font-weight: 600;
+      font-size: 1.4em;
+    }
+  </style>
 
   <template>
 
     <paper-item>
       <template is="dom-if" if="[[item.image]]">
-        <img class="avatar" src="[[item.image]]">
+        <a href="[[item.image]]" target="_blank">
+          <img class="avatar" src="[[item.image]]">
+        </a>
       </template>
       <template is="dom-if" if="[[!item.image]]">
         <div class="avatar-blank">
@@ -20980,16 +20985,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </paper-item-body>
     </paper-item>
 
-</template>
+  </template>
 
-    <script>
-        Polymer({
-            is: 'myb-performance-item',
-            properties: {
-                item: Object
-            }
-        });
-    </script>
+  <script>
+    Polymer({
+      is: 'myb-performance-item',
+      properties: {
+        item: Object
+      }
+    });
+  </script>
 
 </dom-module>
 <dom-module id="myb-performance-list" assetpath="myb-performance/">
