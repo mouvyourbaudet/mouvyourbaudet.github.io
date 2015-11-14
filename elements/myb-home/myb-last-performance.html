@@ -13,17 +13,29 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../myb-performance/myb-performance-item.html">
 
 <dom-module id="myb-last-performance">
+  <style>
+    paper-card {
+      width: 100%;
+    }
+  </style>
   <template>
     <firebase-collection
-            order-by-child="height"
-            limit-to-first="1"
+            order-by-child="endDate"
+            start-at="{{now}}"
+            order-value-type="number"
             location="https://myb.firebaseio.com/performances"
             data="{{performances}}"></firebase-collection>
-    <paper-material>
+    <paper-card>
+      <template is="dom-if" if="[[performances]]">
     <template is="dom-repeat" items="[[performances]]" as="item">
       <myb-performance-item item="{{item}}"></myb-performance-item>
       </template>
-    </paper-material>
+      </template>
+
+      <template is="dom-if" if="[[performances]]">
+      <div class="card-content">Aucune prestation prévue</div>
+      </template>
+    </paper-card>
 
   </template>
 
@@ -32,7 +44,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       'use strict';
 
       Polymer({
-        is: 'myb-last-performance'
+        is: 'myb-last-performance',
+        ready:function(){
+          this.now = new Date().getTime()/1000;
+        }
 
       });
     })();

@@ -20615,7 +20615,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 </dom-module>
 <dom-module id="myb-news-list" assetpath="myb-news/">
   <template>
-    <firebase-collection order-by-child="height" location="https://myb.firebaseio.com/news" data="{{news}}"></firebase-collection>
+    <firebase-collection location="https://myb.firebaseio.com/news" data="{{news}}"></firebase-collection>
     <template is="dom-repeat" items="[[news]]" as="item">
       <myb-news-item item="{{item}}"></myb-news-item>
       </template>
@@ -20641,6 +20641,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
 
     .card-content {
+      height: 300px;
       padding: 0;
     }
 
@@ -20706,7 +20707,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </style>
 
   <template>
-    <firebase-collection order-by-child="height" location="https://myb.firebaseio.com/videos" data="{{videos}}"></firebase-collection>
+    <firebase-collection location="https://myb.firebaseio.com/videos" data="{{videos}}"></firebase-collection>
 
     <div class="layout horizontal center-justified wrap">
       <template is="dom-repeat" items="[[videos]]">
@@ -20801,7 +20802,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
   </style>
   <template>
-    <firebase-collection order-by-child="height" location="https://myb.firebaseio.com/songs" data="{{songs}}"></firebase-collection>
+    <firebase-collection location="https://myb.firebaseio.com/songs" data="{{songs}}"></firebase-collection>
     <paper-card elevation="1">
       <div class="card-content">Voici les morceaux originaux qui ont inspiré le répertoire Mouv' Your Baudet (non exhaustif !) :</div>
       <div class="list" role="list">
@@ -20922,6 +20923,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             margin-bottom: 16px;
             --paper-card-header-color: var(--default-primary-color);
         }
+        paper-item {
+          padding: 0px 0px 0px 0px;
+        }
         .avatar {
           display: inline-block;
           width: 60px;
@@ -20990,7 +20994,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 </dom-module>
 <dom-module id="myb-performance-list" assetpath="myb-performance/">
   <template>
-    <firebase-collection order-by-child="height" location="https://myb.firebaseio.com/performances" data="{{performances}}"></firebase-collection>
+    <firebase-collection location="https://myb.firebaseio.com/performances" data="{{performances}}"></firebase-collection>
     <paper-material elevation="1">
     <div class="list" role="list">
     <template is="dom-repeat" items="[[performances]]" as="item">
@@ -21039,7 +21043,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </style>
 
   <template>
-    <firebase-collection order-by-child="height" location="https://myb.firebaseio.com/friends" data="{{friends}}"></firebase-collection>
+    <firebase-collection location="https://myb.firebaseio.com/friends" data="{{friends}}"></firebase-collection>
 
     <paper-material elevation="1">
       <div class="list" role="list">
@@ -21509,17 +21513,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       margin-bottom: 16px;
       --paper-card-header-color: var(--default-primary-color);
     }
-
-    .card-content {
-      text-align: justify;
-    }
   </style>
   <template>
-
-
     <paper-card elevation="1" heading="Histoire">
-      <div class="card-content">Tatiana arriva au local de répétition vers 21 h, habillée très sexy. Elle avait pris
-        soin de prendre un long
+      <div class="card-content">Tatiana arriva au local de répétition vers 21 h, habillée très sexy. Elle avait pris soin de prendre un long
         bain parfumé à la patate douce et au piment oiseau d'Ardin (banlieue chic de Los Angeles). Elle savait le
         mélange à la hauteur de la variété du répertoire. Suave mais tonique.
         Après un court rituel d'embrassades toutes en retenue (23h20), Tatiana dégrafa son caraco-shorty pour mieux se
@@ -21556,13 +21553,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <script>
     Polymer({
-      is: 'myb-introduction',
-      properties: {
-        year: {
-          type: Number,
-          value: new Date().getFullYear() - 2009
-        }
-      }
+      is: 'myb-introduction'
     });
   </script>
 
@@ -21598,7 +21589,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 </dom-module>
 <dom-module id="myb-last-news" assetpath="myb-home/">
   <template>
-    <firebase-collection order-by-child="height" limit-to-first="1" location="https://myb.firebaseio.com/news" data="{{news}}"></firebase-collection>
+    <firebase-collection limit-to-first="1" location="https://myb.firebaseio.com/news" data="{{news}}"></firebase-collection>
     <template is="dom-repeat" items="[[news]]" as="item">
         <myb-news-item item="{{item}}"></myb-news-item>
       </template>
@@ -21649,7 +21640,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </style>
 
   <template>
-    <firebase-collection order-by-child="height" limit-to-first="1" location="https://myb.firebaseio.com/videos" data="{{videos}}"></firebase-collection>
+    <firebase-collection limit-to-first="1" location="https://myb.firebaseio.com/videos" data="{{videos}}"></firebase-collection>
 
     <template is="dom-repeat" items="[[videos]]">
       <myb-video-item item="[[item]]"></myb-video-item>
@@ -21680,7 +21671,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <paper-button class="self-start">Dernière news</paper-button>
       <myb-last-news></myb-last-news>
 
-      <paper-button class="self-start">Prochaine prestation</paper-button>
+      <paper-button class="self-start">Prochaines prestations</paper-button>
       <myb-last-performance></myb-last-performance>
 
       <div class="layout horizontal center-justified wrap">
@@ -21704,13 +21695,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </script>
 </dom-module>
 <dom-module id="myb-last-performance" assetpath="myb-home/">
+  <style>
+    paper-card {
+      width: 100%;
+    }
+  </style>
   <template>
-    <firebase-collection order-by-child="height" limit-to-first="1" location="https://myb.firebaseio.com/performances" data="{{performances}}"></firebase-collection>
-    <paper-material>
+    <firebase-collection order-by-child="endDate" start-at="{{now}}" order-value-type="number" location="https://myb.firebaseio.com/performances" data="{{performances}}"></firebase-collection>
+    <paper-card>
+      <template is="dom-if" if="[[performances]]">
     <template is="dom-repeat" items="[[performances]]" as="item">
       <myb-performance-item item="{{item}}"></myb-performance-item>
       </template>
-    </paper-material>
+      </template>
+
+      <template is="dom-if" if="[[performances]]">
+      <div class="card-content">Aucune prestation prévue</div>
+      </template>
+    </paper-card>
 
   </template>
 
@@ -21719,7 +21721,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       'use strict';
 
       Polymer({
-        is: 'myb-last-performance'
+        is: 'myb-last-performance',
+        ready:function(){
+          this.now = new Date().getTime()/1000;
+        }
 
       });
     })();

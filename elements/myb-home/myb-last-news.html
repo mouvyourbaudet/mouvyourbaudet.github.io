@@ -6,7 +6,6 @@
 <dom-module id="myb-last-news">
   <template>
     <firebase-collection
-            order-by-child="height"
             limit-to-first="1"
             location="https://myb.firebaseio.com/news"
             data="{{news}}"></firebase-collection>
