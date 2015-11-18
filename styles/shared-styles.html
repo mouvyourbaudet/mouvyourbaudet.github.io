@@ -1,4 +1,10 @@
 <dom-module id="shared-styles"><template><style>
+      @media (max-width: 600px) {
+        .page-title {
+          font-size: 24px !important;
+        }
+      }
+
       .page-title {
         @apply(--paper-font-display2);
       }
@@ -64,11 +70,5 @@
 
       paper-scroll-header-panel::shadow #condensedHeaderBg {
         background-color: var(--default-primary-color);
-      }
-
-      @media (max-width: 600px) {
-        .page-title {
-          font-size: 24px!important;
-        }
       }
     </style></template></dom-module>

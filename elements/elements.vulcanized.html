@@ -20433,6 +20433,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 </script>
 <dom-module id="shared-styles" assetpath="../styles/"><template><style>
+      @media (max-width: 600px) {
+        .page-title {
+          font-size: 24px !important;
+        }
+      }
+
       .page-title {
         @apply(--paper-font-display2);
       }
@@ -20498,12 +20504,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       paper-scroll-header-panel::shadow #condensedHeaderBg {
         background-color: var(--default-primary-color);
-      }
-
-      @media (max-width: 600px) {
-        .page-title {
-          font-size: 24px!important;
-        }
       }
     </style></template></dom-module><dom-module id="myb-place" assetpath="myb-place/">
   <style>
@@ -20925,7 +20925,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
 
     paper-item {
-      padding: 0px 0px 0px 0px;
+      padding: 0;
     }
 
     .avatar {
@@ -21081,6 +21081,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     paper-card {
       height: 100%;
       width: 100%;
+      display: block;
     }
 
     .card-content {
@@ -21703,6 +21704,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <style>
     paper-card {
       width: 100%;
+      display: block;
     }
   </style>
   <template>
