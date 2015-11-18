@@ -21031,15 +21031,37 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       overflow: hidden;
       background: var(--text-primary-color);
       margin: 20px;
+      float: left;
     }
 
-    a, a:visited {
+    paper-item:hover {
+      background-color: var(--light-primary-color);
+    }
+
+    paper-item a {
+      width: 100%;
+    }
+
+    paper-item[focused]:before {
+      background: none;
+    }
+
+    paper-item-body {
+      margin: 12px;
+    }
+
+    a, a:visited, a:focus {
+      color: var(--primary-text-color);
       text-decoration: none;
-      color: var(--default-primary-color);
-      font-weight: 600;
+      outline: none;
     }
 
-    .iconAccent {
+    .friend-link {
+      font-weight: 600;
+      color: var(--default-primary-color);
+    }
+
+    .cloud-icon {
       fill: var(--accent-color);
       padding-right: 3px;
       width: 20px;
@@ -21051,22 +21073,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <firebase-collection location="https://myb.firebaseio.com/friends" data="{{friends}}"></firebase-collection>
 
     <paper-material elevation="1">
-      <div class="list" role="list">
-        <template is="dom-repeat" items="[[friends]]">
-          <paper-item>
-            <a href="{{item.url}}" target="_blank">
-              <img class="avatar" src="/images/friend/{{item.image}}">
-            </a>
+
+      <template is="dom-repeat" items="[[friends]]">
+        <paper-item>
+          <a href="{{item.url}}" target="_blank">
+            <img class="avatar" src="/images/friend/{{item.image}}">
+
             <paper-item-body two-line="" class="layout vertical">
               <div>[[item.name]]</div>
               <div secondary="">[[item.description]]</div>
               <div secondary="">
-                <iron-icon icon="icons:cloud-circle" class="iconAccent"></iron-icon>
-                <a href="{{item.url}}" target="_blank">[[item.url]]</a></div>
+                <iron-icon icon="icons:cloud-circle" class="cloud-icon"></iron-icon>
+                <span class="friend-link">[[item.url]]</span>
+              </div>
             </paper-item-body>
-          </paper-item>
-        </template>
-      </div>
+          </a>
+        </paper-item>
+      </template>
     </paper-material>
   </template>
 
