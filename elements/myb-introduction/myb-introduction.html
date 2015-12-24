@@ -6,11 +6,90 @@
   <style>
     paper-card {
       width: 100%;
-      margin-bottom: 16px;
+      /*margin-bottom: 16px;*/
       --paper-card-header-color: var(--default-primary-color);
+    }
+
+    iron-image {
+      /*height: 100%;*/
+      /*width: 100%;*/
+    }
+    .cover {
+      position: relative;
+    }
+
+    a, a:visited {
+      color: var(--default-primary-color);
+      font-weight: 600;
+      text-decoration: none;
     }
   </style>
   <template>
+    <paper-card elevation="1" heading="Présentage">
+      <div class="card-content">
+        <p>La fanfare <b>Mouv' your Baudet</b> est une fanfare "de vieux" de <b>Poitiers</b>.
+          Elle est composée de <b>15 fanfarons</b> expérimentés, issus de multiples parcours (18 trous), et évoluant
+          à différents pupitres : <b>trompette</b>, <b>trombone</b>, <b>tuba basse</b>, <b>sousaphone</b>, <b>percu</b>
+          (grosse caisse, caisse claire, et occasionnellement bongo).
+          La fanfare fête cette année ses <b>{{year}} ans</b> d'existence.
+        <br/><br/>
+          Le
+          <a data-route="songs" href="/songs" on-click="onDataRouteClick">répertoire musical</a> Mouv' your Baudet
+          est très varié. Il est inspiré de la <b>variété française et internationale</b> (voire extra-terrestre), des années 50 à nos jours.<br/><br/>
+          On y retrouve divers styles musicaux : <b>disco</b>, <b>pop</b>, <b>dance</b>, <b>techno</b>, <b>ska</b>, <b>rock</b>, <b>metal</b>, <b>bal musette</b> et bien d'autres encore...
+     <br/>
+     <br/>
+          La fanfare Mouv' your Baudet, c'est <b>15 musiciens</b> au taquet pour <b>animer</b> POUR VOUS tout type de
+        <a data-route="performances" href="/performances" on-click="onDataRouteClick">prestation</a> :<br/>
+        - Mariages<br/>
+        - Divorces<br/>
+        - Bar Mitsvah<br/>
+        - Anniversaires<br/>
+        - Fêtes de quartier<br/>
+        - Fêtes de village<br/>
+        - Festivals<br/>
+        - Marathons<br/>
+        - Lotos sportifs<br/>
+        - Inaugurations<br/>
+        - Portes ouvertes de caves<br/>
+        - Carnavals<br/>
+        - Départs en retraite<br/>
+        - Mutations<br/>
+        - Décollage de soucoupe volante<br/>
+        - <b>&#91; Insérez votre prestation ici &#93;</b>
+      </p>
+      </div>
+      <div class="card-content">
+      Alors, n'hésitez plus, <a data-route="contact" href="/contact" on-click="onDataRouteClick">contactez le Président !</a>
+      </div>
+    </paper-card>
+
+    <paper-card>
+    <div class="cover layout vertical">
+      <iron-image cross-fade preload fade src="/images/background/performances.jpg"></iron-image>
+    </div>
+    </paper-card>
+
+    <paper-card elevation="1" heading="Témoignages">
+      <div class="card-content">
+        <p>SUPER SOIRÉE BOJO 2015 !<br/><br/>
+          Des témoins témoignent en témoignant:<br/>
+          - "<i>Avec Robert, mon époux, nous avons fait l'amour toute la nuit, grâce à la fanfare Mouv' your Baudet.</i>" (Ginette, 85 ans, retraitée)<br/>
+          - "<i>Je détestais le vin et là, ça a été une révélation, je ne bois plus que du beaujolais.</i>" (Ahmadinejad, Président factuel)<br/>
+          - "<i>J'ai perdu la haine que j'avais en moi, je suis tombé amoureux de Sessouma, un gabonais de 10 ans mon aîné.</i>" (J.M. le Pen, pré-retraité)<br/>
+          - "<i>Ma Ginette était saoule, a dansé comme une folle, du coup elle a dormi comme une souche et j'ai pu regarder le porno à la TV.</i>" (Robert, 90 ans, pré-adolescent)<br/>
+          <br/>
+          ENCORE UNE SOIRÉE RÉUSSIE GRACE AUX
+          MOUV' YOUR BAUDET !!!! </p>
+      </div>
+    </paper-card>
+
+    <paper-card>
+    <div class="cover layout vertical">
+      <iron-image cross-fade preload fade src="/images/background/videos.jpg"></iron-image>
+    </div>
+    </paper-card>
+
     <paper-card elevation="1" heading="Histoire">
       <div class="card-content">Tatiana arriva au local de répétition vers 21 h, habillée très sexy. Elle avait pris soin de prendre un long
         bain parfumé à la patate douce et au piment oiseau d'Ardin (banlieue chic de Los Angeles). Elle savait le
@@ -45,11 +124,21 @@
         La Baudet Team
       </div>
     </paper-card>
+
+    <paper-card>
+    <div class="cover layout vertical">
+      <iron-image cross-fade preload fade src="/images/background/albums.jpg"></iron-image>
+    </div>
+    </paper-card>
+
   </template>
 
   <script>
     Polymer({
-      is: 'myb-introduction'
+      is: 'myb-introduction',
+      ready:function(){
+        this.year = new Date().getFullYear()-2009;
+      }
     });
   </script>
 
