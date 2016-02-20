@@ -16,11 +16,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       iron-icon[icon="query-builder"] {
           color: var(--accent-color);
       }
+      .date {
+        color: var(--primary-text-color);
+      }
   </style>
 
   <template>
         <iron-icon icon="query-builder"></iron-icon>
-       <span class="paper-font-body1">{{dateToString}}</span>
+       <span class="paper-font-body1 date">{{dateToString}}</span>
   </template>
 
   <script>
