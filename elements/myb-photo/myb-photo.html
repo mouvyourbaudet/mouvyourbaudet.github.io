@@ -133,8 +133,6 @@ which is easiest achieved by using iron-flex-layout.
 </dom-module>
 
 <script>
-  (function (global) {
-    var Polymer = global.Polymer;
     Polymer({
       is: 'myb-photo',
       properties: {
@@ -198,7 +196,7 @@ which is easiest achieved by using iron-flex-layout.
         }
       },
       _showPhoto: function () {
-        this._currentPhoto = imageUrl(this._data.feed.entry[this._selected].content.src, this.offsetWidth);
+        this._currentPhoto = this.imageUrl(this._data.feed.entry[this._selected].content.src, this.offsetWidth);
       },
       _picasaUrl: function (user, album, tag) {
         if (!!tag) {
@@ -214,12 +212,11 @@ which is easiest achieved by using iron-flex-layout.
       },
       press : function(key){
         console.log(key);
+      },
+      imageUrl: function (url, size) {
+        var p = url.lastIndexOf('/');
+        url = url.substring(0, p + 1) + 's' + (size || 1024) + '/' + url.substring(p + 1);
+        return url;
       }
     });
-    function imageUrl(url, size) {
-      var p = url.lastIndexOf('/');
-      url = url.substring(0, p + 1) + 's' + (size || 1024) + '/' + url.substring(p + 1);
-      return url;
-    }
-  }(this));
 </script>
