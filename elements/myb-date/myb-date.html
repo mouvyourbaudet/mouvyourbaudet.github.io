@@ -30,6 +30,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     Polymer({
       is: 'myb-date',
       properties: {
+        withHours: {
+          type: Boolean,
+          value: false
+        },
+        format: {
+          type: String,
+          computed: 'getFormat(withHours)'
+        },
         date: {
           type: String,
           value: 'Aucune date'
@@ -39,12 +47,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           computed: 'toString(date)'
         }
       },
+      getFormat: function() {
+        return this.withHours ? 'LLLL' : 'dddd D MMMM YYYY';
+      },
       toString: function (timestamp) {
         var locale = window.navigator.userLanguage || window.navigator.language;
 
         return this.capitalize(moment.unix(timestamp)
           .locale(locale)
-          .format('LLLL'));
+          .format(this.format));
       },
       capitalize: function(s){
         return s && s[0].toUpperCase() + s.slice(1);

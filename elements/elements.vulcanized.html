@@ -22268,6 +22268,14 @@ llll:"ddd, D MMM YYYY HH:mm"},calendar:{sameDay:"[Hôm nay lúc] LT",nextDay:"[N
     Polymer({
       is: 'myb-date',
       properties: {
+        withHours: {
+          type: Boolean,
+          value: false
+        },
+        format: {
+          type: String,
+          computed: 'getFormat(withHours)'
+        },
         date: {
           type: String,
           value: 'Aucune date'
@@ -22277,12 +22285,15 @@ llll:"ddd, D MMM YYYY HH:mm"},calendar:{sameDay:"[Hôm nay lúc] LT",nextDay:"[N
           computed: 'toString(date)'
         }
       },
+      getFormat: function() {
+        return this.withHours ? 'LLLL' : 'dddd D MMMM YYYY';
+      },
       toString: function (timestamp) {
         var locale = window.navigator.userLanguage || window.navigator.language;
 
         return this.capitalize(moment.unix(timestamp)
           .locale(locale)
-          .format('LLLL'));
+          .format(this.format));
       },
       capitalize: function(s){
         return s && s[0].toUpperCase() + s.slice(1);
@@ -22519,14 +22530,18 @@ llll:"ddd, D MMM YYYY HH:mm"},calendar:{sameDay:"[Hôm nay lúc] LT",nextDay:"[N
 
 <dom-module id="myb-period" assetpath="myb-date/">
   <style>
-      iron-icon[icon="query-builder"] {
-          color: var(--accent-color);
-      }
+    iron-icon[icon="query-builder"] {
+      color: var(--accent-color);
+    }
+    .period {
+      color: var(--primary-text-color);
+    }
   </style>
 
   <template>
-        <iron-icon icon="query-builder"></iron-icon>
-       <span class="paper-font-body1">Du [[startDateToString]] au [[endDateToString]]</span>
+    <iron-icon icon="query-builder"></iron-icon>
+    
+    <span class="paper-font-body1 period">[[humanReadableDate]]</span>
   </template>
 
   <script>
@@ -22548,6 +22563,10 @@ llll:"ddd, D MMM YYYY HH:mm"},calendar:{sameDay:"[Hôm nay lúc] LT",nextDay:"[N
         endDateToString: {
           type: String,
           computed: 'toString(endDate)'
+        },
+        humanReadableDate: {
+          type: String,
+          computed: 'capitalizedHumanReadableSpanTo(startDate, endDate)'
         }
       },
       toString: function (timestamp) {
@@ -22556,7 +22575,115 @@ llll:"ddd, D MMM YYYY HH:mm"},calendar:{sameDay:"[Hôm nay lúc] LT",nextDay:"[N
         return moment.unix(timestamp)
           .locale(locale)
           .format('LLLL');
+      },
+      unixTimestampToDate: function(unixSeconds) {
+        return new Date(unixSeconds * 1000);
+      },
+      unixTimestampToDateTime: function(unixSeconds) {
+        return new Date(this.unixTimestampToDate(unixSeconds));
+      },
+      getUnixTimestamp: function() {
+        return new Date().getMilliseconds() /1000;
+      },
+      isToday: function(unixTimestamp) {
+        var dateTime = this.unixTimestampToDateTime(unixTimestamp);
+        return this.isSameDay(new Date(),dateTime);
+      },
+
+      isTomorrow: function(unixTimestamp) {
+        var dateTime = this.unixTimestampToDateTime(unixTimestamp);
+        var today = new Date();
+        today.setTime( today.getTime() + 86400000 );
+        return this.isSameDay(today,dateTime);
+      },
+      isYesterday: function(unixTimestamp) {
+        var dateTime = this.unixTimestampToDateTime(unixTimestamp);
+        var today = new Date();
+        today.setTime( today.getTime() - 86400000 );
+        return this.isSameDay(today,dateTime);
+      },
+      isSameDay: function(startDate, endDate) {
+        return this.isSameMonth(startDate, endDate) && startDate.getMonth() === endDate.getMonth();
+      },
+      isSameMonth: function(startDate, endDate) {
+        return this.isSameYear(startDate, endDate) && startDate.getMonth() === endDate.getMonth();
+      },
+      isSameYear: function(startDate, endDate) {
+        return startDate.getYear() === endDate.getYear();
+      },
+      humanReadableDay: function(unixTimestamp) {
+
+        if (this.isToday(unixTimestamp)) {
+          return 'aujourd\'hui';
+        }
+
+        if (this.isTomorrow(unixTimestamp)) {
+          return 'demain';
+        }
+
+        if (this.isYesterday(unixTimestamp)) {
+          return 'hier';
+        }
+
+        var locale = window.navigator.userLanguage || window.navigator.language;
+
+        return moment.unix(unixTimestamp)
+          .locale(locale)
+          .format('dddd D MMMM YYYY');
+
+      },
+      humanReadableHour: function(unixTimestamp) {
+        var dateTime = this.unixTimestampToDateTime(unixTimestamp);
+
+        if (dateTime.getMinutes() === 0) {
+          return dateTime.getHours()+'h';
+        } else {
+          return dateTime.getHours()+'h'+dateTime.getMinutes();
+        }
+      },
+
+      humanReadableDayAndHour: function(unixTimeStamp) {
+        return this.humanReadableDay(unixTimeStamp) + ' à ' + this.humanReadableHour(unixTimeStamp);
+      },
+
+      humanReadableSpanTo: function(start, end) {
+
+        if (start === end) {
+          return this.humanReadableDayAndHour(start);
+        } else {
+
+          var humanReadableDay = this.humanReadableDay(start);
+          var humanReadableEndingDay = this.humanReadableDay(end);
+          var humanReadableHour = this.humanReadableHour(start);
+          var humanReadableEndingHour = this.humanReadableHour(end);
+
+          if (humanReadableDay===humanReadableEndingDay) {
+            return humanReadableDay + ' de ' + humanReadableHour + ' à ' + humanReadableEndingHour;
+          } else {
+            return 'du ' + humanReadableDay + ' à ' + humanReadableHour + ' au ' + humanReadableEndingDay + ' à ' + humanReadableEndingHour;
+          }
+        }
+      },
+
+      capitalize: function(s) {
+        if (s === undefined) {
+          return undefined;
+        }
+        if (s.length === 1) {
+          return s.toUpperCase();
+        }
+        if (s.length > 1) {
+          return s.substring(0, 1).toUpperCase() + s.substring(1);
+        }
+        return '';
+      },
+      capitalizedHumanReadableDayAndHour: function(unixTimeStamp) {
+        return this.capitalize(this.humanReadableDayAndHour(unixTimeStamp));
+      },
+      capitalizedHumanReadableSpanTo: function(start, end){
+        return this.capitalize(this.humanReadableSpanTo(start,end));
       }
+
     });
   </script>
 
