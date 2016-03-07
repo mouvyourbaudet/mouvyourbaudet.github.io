@@ -22603,7 +22603,7 @@ llll:"ddd, D MMM YYYY HH:mm"},calendar:{sameDay:"[Hôm nay lúc] LT",nextDay:"[N
         return this.isSameDay(today,dateTime);
       },
       isSameDay: function(startDate, endDate) {
-        return this.isSameMonth(startDate, endDate) && startDate.getMonth() === endDate.getMonth();
+        return this.isSameMonth(startDate, endDate) && startDate.getDay() === endDate.getDay();
       },
       isSameMonth: function(startDate, endDate) {
         return this.isSameYear(startDate, endDate) && startDate.getMonth() === endDate.getMonth();
