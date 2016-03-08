@@ -23753,30 +23753,23 @@ llll:"ddd, D MMM YYYY HH:mm"},calendar:{sameDay:"[Hôm nay lúc] LT",nextDay:"[N
   </style>
   <template>
     <firebase-collection order-by-child="endDate" start-at="{{now}}" order-value-type="number" location="https://myb.firebaseio.com/performances" data="{{performances}}"></firebase-collection>
-    <paper-card>
-      <template is="dom-if" if="[[performances]]">
-    <template is="dom-repeat" items="[[performances]]" as="item">
-      <myb-performance-item item="{{item}}"></myb-performance-item>
-      </template>
-      </template>
-
-      <template is="dom-if" if="{{!hasPerformances(performances)}}">
-      <div class="card-content">Aucune prestation prévue prochainement</div>
-      </template>
-    </paper-card>
+    <template is="dom-if" if="{{performances}}">
+      <paper-card>
+        <template is="dom-repeat" items="{{performances}}" as="item">
+          <myb-performance-item item="{{item}}"></myb-performance-item>
+        </template>
+      </paper-card>
+    </template>
 
   </template>
 
   <script>
-      Polymer({
-        is: 'myb-next-performance',
-        ready:function(){
-          this.now = new Date().getTime()/1000;
-        },
-        hasPerformances: function(performances) {
-          return performances.length>0;
-        }
-      });
+    Polymer({
+      is: 'myb-next-performance',
+      ready: function () {
+        this.now = new Date().getTime() / 1000;
+      }
+    });
   </script>
 
 </dom-module>
