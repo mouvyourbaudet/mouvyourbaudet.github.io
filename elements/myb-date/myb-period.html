@@ -86,7 +86,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         return this.isSameDay(today,dateTime);
       },
       isSameDay: function(startDate, endDate) {
-        return this.isSameMonth(startDate, endDate) && startDate.getDay() === endDate.getDay();
+        return this.isSameMonth(startDate, endDate) && startDate.getDate() === endDate.getDate();
       },
       isSameMonth: function(startDate, endDate) {
         return this.isSameYear(startDate, endDate) && startDate.getMonth() === endDate.getMonth();
