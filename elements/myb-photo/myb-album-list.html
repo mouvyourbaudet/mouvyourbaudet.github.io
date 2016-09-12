@@ -24,7 +24,7 @@
       last-response="{{data}}"></iron-ajax>
 
     <div class="layout horizontal center-justified wrap">
-      <template is="dom-repeat" items="[[data.feed.entry]]" as="item">
+      <template is="dom-repeat" items="[[getAlbumsSortByDate(data.photosets.photoset)]]" as="item">
         <myb-album-item item="{{item}}"></myb-album-item>
       </template>
     </div>
@@ -39,7 +39,12 @@
       data: Object
     },
     url: function (user) {
-      return 'https://picasaweb.google.com/data/feed/api/user/' + user + '?alt=json&kind=album&imgmax=400u';
+      return 'https://api.flickr.com/services/rest/?method=flickr.photosets.getList&api_key=d02d27104d6cb6d8d9124917feedf869&user_id=' + user + '&primary_photo_extras=url_m,date_taken&format=json&nojsoncallback=1';
+    },
+    getAlbumsSortByDate: function(items) {
+      return items.sort(function(a, b){
+        return new Date(b.primary_photo_extras.datetaken) - new Date(a.primary_photo_extras.datetaken);
+      });
     }
   });
 </script>

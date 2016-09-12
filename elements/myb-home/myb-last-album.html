@@ -16,7 +16,7 @@
       handle-as="json"
       last-response="{{data}}"></iron-ajax>
 
-    <myb-album-item item="{{data.feed.entry.0}}"></myb-album-item>
+    <myb-album-item item="{{lastAlbum(data)}}"></myb-album-item>
   </template>
 </dom-module>
 
@@ -28,7 +28,10 @@
       data: Object
     },
     url: function (user) {
-      return 'https://picasaweb.google.com/data/feed/api/user/' + user + '?alt=json&max-results=1&kind=album&imgmax=400u';
+      return 'https://api.flickr.com/services/rest/?method=flickr.photosets.getList&api_key=d02d27104d6cb6d8d9124917feedf869&user_id=' + user + '&primary_photo_extras=url_m,date_taken&format=json&nojsoncallback=1';
+    },
+    lastAlbum: function(data) {
+      return data.photosets.photoset[data.photosets.photoset.length-1];
     }
   });
 </script>

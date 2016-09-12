@@ -23079,41 +23079,39 @@ llll:"ddd, D MMM YYYY HH:mm"},calendar:{sameDay:"[Hôm nay lúc] LT",nextDay:"[N
       <div class="layout vertical">
         <div class="card-content flex">
           <div class="cover layout vertical">
-            <a href="{{url(item.gphoto$id.$t)}}">
-              <template is="dom-repeat" items="[[item.media$group.media$content]]" as="photo">
-                <iron-image cross-fade="" preload="" fade="" src="{{photo.url}}" sizing="cover"></iron-image>
-              </template>
+            <a href="{{url(item.id)}}">
+                <iron-image cross-fade="" preload="" fade="" src="{{item.primary_photo_extras.url_m}}" sizing="cover"></iron-image>
             </a>
 
             <div class="title">
-              {{item.title.$t}}
+              {{item.title._content}}
             </div>
 
-            <template is="dom-if" if="{{item.media$group.media$description.$t}}">
-              <span>{{item.media$group.media$description.$t}}</span>
+            <template is="dom-if" if="{{item.description._content}}">
+              <span>{{item.description._content}}</span>
             </template>
           </div>
         </div>
 
-        <template is="dom-if" if="{{item.gphoto$numphotos.$t}}">
+        <template is="dom-if" if="{{item.photos}}">
           <div class="card-actions">
             <iron-icon icon="perm-media"></iron-icon>
-            <span class="paper-font-body1">{{item.gphoto$numphotos.$t}}</span>
+            <span class="paper-font-body1">{{item.photos}}</span>
             <span class="paper-font-body1"> photos</span>
           </div>
         </template>
 
-        <template is="dom-if" if="{{item.gphoto$timestamp.$t}}">
+        <template is="dom-if" if="{{item.primary_photo_extras.datetaken}}">
           <div class="card-actions">
-            <myb-date date="{{date(item.gphoto$timestamp.$t)}}"></myb-date>
+            <myb-date date="{{date(item)}}"></myb-date>
           </div>
         </template>
 
-        <template is="dom-if" if="{{item.gphoto$location.$t}}">
-          <div class="card-actions">
-            <myb-place place="{{item.gphoto$location.$t}}"></myb-place>
-          </div>
-        </template>
+        
+          
+            
+          
+        
       </div>
     </paper-card>
   </template>
@@ -23122,17 +23120,17 @@ llll:"ddd, D MMM YYYY HH:mm"},calendar:{sameDay:"[Hôm nay lúc] LT",nextDay:"[N
     Polymer({
       is: 'myb-album-item',
       properties: {
-        item: Object
+        item: Object,
       },
       url: function (string) {
         return '/albums/' + string;
       },
-      date: function (string) {
-        return parseInt(string) / 1000;
-      },
       toString: function (s) {
         return JSON.stringify(s);
-      }
+      },
+      date: function (item) {
+        return Date.parse(item.primary_photo_extras.datetaken)/1000;
+      },
     });
   </script>
 
@@ -23155,7 +23153,7 @@ llll:"ddd, D MMM YYYY HH:mm"},calendar:{sameDay:"[Hôm nay lúc] LT",nextDay:"[N
     <iron-ajax auto="" url="{{url(user)}}" handle-as="json" last-response="{{data}}"></iron-ajax>
 
     <div class="layout horizontal center-justified wrap">
-      <template is="dom-repeat" items="[[data.feed.entry]]" as="item">
+      <template is="dom-repeat" items="[[getAlbumsSortByDate(data.photosets.photoset)]]" as="item">
         <myb-album-item item="{{item}}"></myb-album-item>
       </template>
     </div>
@@ -23170,7 +23168,12 @@ llll:"ddd, D MMM YYYY HH:mm"},calendar:{sameDay:"[Hôm nay lúc] LT",nextDay:"[N
       data: Object
     },
     url: function (user) {
-      return 'https://picasaweb.google.com/data/feed/api/user/' + user + '?alt=json&kind=album&imgmax=400u';
+      return 'https://api.flickr.com/services/rest/?method=flickr.photosets.getList&api_key=d02d27104d6cb6d8d9124917feedf869&user_id=' + user + '&primary_photo_extras=url_m,date_taken&format=json&nojsoncallback=1';
+    },
+    getAlbumsSortByDate: function(items) {
+      return items.sort(function(a, b){
+        return new Date(b.primary_photo_extras.datetaken) - new Date(a.primary_photo_extras.datetaken);
+      });
     }
   });
 </script>
@@ -23198,6 +23201,7 @@ llll:"ddd, D MMM YYYY HH:mm"},calendar:{sameDay:"[Hôm nay lúc] LT",nextDay:"[N
       margin: 2px;
       border-radius: 4px;
       cursor: pointer;
+      object-fit: cover;
     }
 
     #lightbox, #photo, #actions {
@@ -23224,7 +23228,7 @@ llll:"ddd, D MMM YYYY HH:mm"},calendar:{sameDay:"[Hôm nay lúc] LT",nextDay:"[N
     }
   </style>
   <template on-presskey="{{key}}">
-    <iron-ajax auto="" url="{{_picasaUrl(user, album, tag)}}" handle-as="json" last-response="{{_data}}"></iron-ajax>
+    <iron-ajax auto="" url="{{url(album)}}" handle-as="json" last-response="{{_data}}"></iron-ajax>
     <neon-animated-pages id="photos" class="fit" selected="0">
 
       <section class="vertical layout">
@@ -23232,11 +23236,11 @@ llll:"ddd, D MMM YYYY HH:mm"},calendar:{sameDay:"[Hôm nay lúc] LT",nextDay:"[N
           <a data-route="albums" href="/albums" on-click="onDataRouteClick">
           <div class="title"><h1>
               <paper-icon-button icon="arrow-back" on-tap="_back" aria-label="Back"></paper-icon-button>
-          <span>{{_data.feed.title.$t}}</span></h1></div>
+          <span>{{_data.photoset.title}}</span></h1></div>
           </a>
           <div id="container" class="flex horizontal wrap start-justified layout">
-            <template is="dom-repeat" items="{{_data.feed.entry}}">
-              <img class="thumbnail" src="{{_thumbnail(item.content.src)}}" on-tap="_selectPhoto">
+            <template is="dom-repeat" items="{{_data.photoset.photo}}">
+              <img class="thumbnail" src="{{item.url_m}}" on-tap="_selectPhoto">
             </template>
           </div>
         </div>
@@ -23248,7 +23252,7 @@ llll:"ddd, D MMM YYYY HH:mm"},calendar:{sameDay:"[Hôm nay lúc] LT",nextDay:"[N
         <div id="lightbox" class="flex vertical layout">
 
           <paper-toolbar id="actions">
-            <div class="flex pagination"><span>{{toString(_selected)}}</span> / <span>{{_data.feed.entry.length}}</span>
+            <div class="flex pagination"><span>{{toString(_selected)}}</span> / <span>{{_data.photoset.total}}</span>
             </div>
             <div class="flex">
               <paper-icon-button icon="arrow-back" on-tap="_back" aria-label="Back"></paper-icon-button>
@@ -23269,27 +23273,7 @@ llll:"ddd, D MMM YYYY HH:mm"},calendar:{sameDay:"[Hôm nay lúc] LT",nextDay:"[N
     Polymer({
       is: 'myb-photo',
       properties: {
-        /**
-         * Numeric Google User ID of the owner of the album
-         *
-         * @attribute user
-         * @type string
-         */
-        user: String,
-        /**
-         * Numeric Album ID
-         *
-         * @attribute album
-         * @type string
-         */
         album: {
-          type: String,
-          value: ''
-        },
-        /**
-         * Tag to search photos by the specified user, will be used instead of album.
-         */
-        tag: {
           type: String,
           value: ''
         },
@@ -23316,40 +23300,26 @@ llll:"ddd, D MMM YYYY HH:mm"},calendar:{sameDay:"[Hôm nay lúc] LT",nextDay:"[N
       },
       _back: function () {
         if (this._selected < 1) {
-          this._selected = this._data.feed.entry.length - 1;
+          this._selected = this._data.photoset.total - 1;
         } else {
           this._selected--;
         }
       },
       _forward: function () {
-        if (this._selected >= this._data.feed.entry.length - 1) {
+        if (this._selected >= this._data.photoset.total - 1) {
           this._selected = 0;
         } else {
           this._selected++;
         }
       },
       _showPhoto: function () {
-        this._currentPhoto = this.imageUrl(this._data.feed.entry[this._selected].content.src, this.offsetWidth);
+        this._currentPhoto = this._data.photoset.photo[this._selected].url_o;
       },
-      _picasaUrl: function (user, album, tag) {
-        if (!!tag) {
-          return 'https://picasaweb.google.com/data/feed/api/user/' + user + '?kind=photo&tag=sunset&alt=json&max-results=1000';
-        }
-        return 'https://picasaweb.google.com/data/feed/api/user/' + user + '/albumid/' + album + '?alt=json';
-      },
-      _thumbnail: function (src) {
-        return src + '?sz=150';
+      url: function(album) {
+        return 'https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=d02d27104d6cb6d8d9124917feedf869&photoset_id=' + album + '&extras=url_o,url_m&format=json&nojsoncallback=1';
       },
       toString: function (selected) {
         return selected + 1;
-      },
-      press : function(key){
-        console.log(key);
-      },
-      imageUrl: function (url, size) {
-        var p = url.lastIndexOf('/');
-        url = url.substring(0, p + 1) + 's' + (size || 1024) + '/' + url.substring(p + 1);
-        return url;
       }
     });
 </script>
@@ -23666,7 +23636,7 @@ llll:"ddd, D MMM YYYY HH:mm"},calendar:{sameDay:"[Hôm nay lúc] LT",nextDay:"[N
   <template>
     <iron-ajax auto="" url="{{url(user)}}" handle-as="json" last-response="{{data}}"></iron-ajax>
 
-    <myb-album-item item="{{data.feed.entry.0}}"></myb-album-item>
+    <myb-album-item item="{{lastAlbum(data)}}"></myb-album-item>
   </template>
 </dom-module>
 
@@ -23678,7 +23648,10 @@ llll:"ddd, D MMM YYYY HH:mm"},calendar:{sameDay:"[Hôm nay lúc] LT",nextDay:"[N
       data: Object
     },
     url: function (user) {
-      return 'https://picasaweb.google.com/data/feed/api/user/' + user + '?alt=json&max-results=1&kind=album&imgmax=400u';
+      return 'https://api.flickr.com/services/rest/?method=flickr.photosets.getList&api_key=d02d27104d6cb6d8d9124917feedf869&user_id=' + user + '&primary_photo_extras=url_m,date_taken&format=json&nojsoncallback=1';
+    },
+    lastAlbum: function(data) {
+      return data.photosets.photoset[data.photosets.photoset.length-1];
     }
   });
 </script>
@@ -23727,7 +23700,7 @@ llll:"ddd, D MMM YYYY HH:mm"},calendar:{sameDay:"[Hôm nay lúc] LT",nextDay:"[N
       <div class="layout horizontal center-justified wrap">
         <div class="layout vertical last">
           <paper-button class="self-center">Dernier album photo</paper-button>
-          <myb-last-album user="mouvyourweb"></myb-last-album>
+          <myb-last-album user="146740504@N02"></myb-last-album>
         </div>
         <div class="layout vertical last">
           <paper-button class="self-center">Dernière vidéo</paper-button>
@@ -23740,7 +23713,7 @@ llll:"ddd, D MMM YYYY HH:mm"},calendar:{sameDay:"[Hôm nay lúc] LT",nextDay:"[N
 
   <script>
     Polymer({
-      is: 'myb-home'
+      is: 'myb-home',
     });
   </script>
 </dom-module>

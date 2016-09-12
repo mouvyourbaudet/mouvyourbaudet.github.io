@@ -54,41 +54,39 @@
       <div class="layout vertical">
         <div class="card-content flex">
           <div class="cover layout vertical">
-            <a href="{{url(item.gphoto$id.$t)}}">
-              <template is="dom-repeat" items="[[item.media$group.media$content]]" as="photo">
-                <iron-image cross-fade preload fade src="{{photo.url}}" sizing="cover"></iron-image>
-              </template>
+            <a href="{{url(item.id)}}">
+                <iron-image cross-fade preload fade src="{{item.primary_photo_extras.url_m}}" sizing="cover"></iron-image>
             </a>
 
             <div class="title">
-              {{item.title.$t}}
+              {{item.title._content}}
             </div>
 
-            <template is="dom-if" if="{{item.media$group.media$description.$t}}">
-              <span>{{item.media$group.media$description.$t}}</span>
+            <template is="dom-if" if="{{item.description._content}}">
+              <span>{{item.description._content}}</span>
             </template>
           </div>
         </div>
 
-        <template is="dom-if" if="{{item.gphoto$numphotos.$t}}">
+        <template is="dom-if" if="{{item.photos}}">
           <div class="card-actions">
             <iron-icon icon="perm-media"></iron-icon>
-            <span class="paper-font-body1">{{item.gphoto$numphotos.$t}}</span>
+            <span class="paper-font-body1">{{item.photos}}</span>
             <span class="paper-font-body1"> photos</span>
           </div>
         </template>
 
-        <template is="dom-if" if="{{item.gphoto$timestamp.$t}}">
+        <template is="dom-if" if="{{item.primary_photo_extras.datetaken}}">
           <div class="card-actions">
-            <myb-date date="{{date(item.gphoto$timestamp.$t)}}"></myb-date>
+            <myb-date date="{{date(item)}}"></myb-date>
           </div>
         </template>
 
-        <template is="dom-if" if="{{item.gphoto$location.$t}}">
-          <div class="card-actions">
-            <myb-place place="{{item.gphoto$location.$t}}"></myb-place>
-          </div>
-        </template>
+        <!--<template is="dom-if" if="{{item.gphoto$location.$t}}">-->
+          <!--<div class="card-actions">-->
+            <!--<myb-place place="{{item.gphoto$location.$t}}"></myb-place>-->
+          <!--</div>-->
+        <!--</template>-->
       </div>
     </paper-card>
   </template>
@@ -97,17 +95,17 @@
     Polymer({
       is: 'myb-album-item',
       properties: {
-        item: Object
+        item: Object,
       },
       url: function (string) {
         return '/albums/' + string;
       },
-      date: function (string) {
-        return parseInt(string) / 1000;
-      },
       toString: function (s) {
         return JSON.stringify(s);
-      }
+      },
+      date: function (item) {
+        return Date.parse(item.primary_photo_extras.datetaken)/1000;
+      },
     });
   </script>
 

@@ -1,23 +1,3 @@
-<!--
-The `picasa-album` displays a Google+/Picasa photo album.
-
-For the element to render correctly it needs to have a width and height,
-which is easiest achieved by using iron-flex-layout.
-
-##### Example
-
-     <picasa-album user="112336147904981294875" album="6094609692761352017" class="fit"></picasa-album>
-
-     <picasa-album user="112336147904981294875" tag="sunset" class="fit"></picasa-album>
-
-@element picasa-album
-@blurb Element to display a Google+/Picasa photo album
-@status alpha
-@homepage https://github.com/Scarygami/picasa-album/
-@demo demo/demo-album.html
-@demo demo/demo-tag.html
--->
-
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../../bower_components/neon-animation/neon-animated-pages.html">
@@ -55,6 +35,7 @@ which is easiest achieved by using iron-flex-layout.
       margin: 2px;
       border-radius: 4px;
       cursor: pointer;
+      object-fit: cover;
     }
 
     #lightbox, #photo, #actions {
@@ -83,7 +64,7 @@ which is easiest achieved by using iron-flex-layout.
   <template on-presskey="{{key}}">
     <iron-ajax
       auto
-      url="{{_picasaUrl(user, album, tag)}}"
+      url="{{url(album)}}"
       handle-as="json"
       last-response="{{_data}}"></iron-ajax>
     <neon-animated-pages id="photos" class="fit" selected="0">
@@ -93,13 +74,13 @@ which is easiest achieved by using iron-flex-layout.
           <a data-route="albums" href="/albums" on-click="onDataRouteClick">
           <div class="title"><h1>
               <paper-icon-button icon="arrow-back" on-tap="_back" aria-label="Back"></paper-icon-button>
-          <span>{{_data.feed.title.$t}}</span></h1></div>
+          <span>{{_data.photoset.title}}</span></h1></div>
           </a>
           <div id="container" class="flex horizontal wrap start-justified layout">
-            <template is="dom-repeat" items="{{_data.feed.entry}}">
+            <template is="dom-repeat" items="{{_data.photoset.photo}}">
               <img
                 class="thumbnail"
-                src="{{_thumbnail(item.content.src)}}"
+                src="{{item.url_m}}"
                 on-tap="_selectPhoto">
             </template>
           </div>
@@ -112,7 +93,7 @@ which is easiest achieved by using iron-flex-layout.
         <div id="lightbox" class="flex vertical layout">
 
           <paper-toolbar id="actions">
-            <div class="flex pagination"><span>{{toString(_selected)}}</span> / <span>{{_data.feed.entry.length}}</span>
+            <div class="flex pagination"><span>{{toString(_selected)}}</span> / <span>{{_data.photoset.total}}</span>
             </div>
             <div class="flex">
               <paper-icon-button icon="arrow-back" on-tap="_back" aria-label="Back"></paper-icon-button>
@@ -136,27 +117,7 @@ which is easiest achieved by using iron-flex-layout.
     Polymer({
       is: 'myb-photo',
       properties: {
-        /**
-         * Numeric Google User ID of the owner of the album
-         *
-         * @attribute user
-         * @type string
-         */
-        user: String,
-        /**
-         * Numeric Album ID
-         *
-         * @attribute album
-         * @type string
-         */
         album: {
-          type: String,
-          value: ''
-        },
-        /**
-         * Tag to search photos by the specified user, will be used instead of album.
-         */
-        tag: {
           type: String,
           value: ''
         },
@@ -183,40 +144,26 @@ which is easiest achieved by using iron-flex-layout.
       },
       _back: function () {
         if (this._selected < 1) {
-          this._selected = this._data.feed.entry.length - 1;
+          this._selected = this._data.photoset.total - 1;
         } else {
           this._selected--;
         }
       },
       _forward: function () {
-        if (this._selected >= this._data.feed.entry.length - 1) {
+        if (this._selected >= this._data.photoset.total - 1) {
           this._selected = 0;
         } else {
           this._selected++;
         }
       },
       _showPhoto: function () {
-        this._currentPhoto = this.imageUrl(this._data.feed.entry[this._selected].content.src, this.offsetWidth);
+        this._currentPhoto = this._data.photoset.photo[this._selected].url_o;
       },
-      _picasaUrl: function (user, album, tag) {
-        if (!!tag) {
-          return 'https://picasaweb.google.com/data/feed/api/user/' + user + '?kind=photo&tag=sunset&alt=json&max-results=1000';
-        }
-        return 'https://picasaweb.google.com/data/feed/api/user/' + user + '/albumid/' + album + '?alt=json';
-      },
-      _thumbnail: function (src) {
-        return src + '?sz=150';
+      url: function(album) {
+        return 'https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=d02d27104d6cb6d8d9124917feedf869&photoset_id=' + album + '&extras=url_o,url_m&format=json&nojsoncallback=1';
       },
       toString: function (selected) {
         return selected + 1;
-      },
-      press : function(key){
-        console.log(key);
-      },
-      imageUrl: function (url, size) {
-        var p = url.lastIndexOf('/');
-        url = url.substring(0, p + 1) + 's' + (size || 1024) + '/' + url.substring(p + 1);
-        return url;
       }
     });
 </script>
