@@ -28,7 +28,7 @@
       data: Object
     },
     url: function (user) {
-      return 'https://api.flickr.com/services/rest/?method=flickr.photosets.getList&api_key=d02d27104d6cb6d8d9124917feedf869&user_id=' + user + '&primary_photo_extras=url_m,date_taken&format=json&nojsoncallback=1';
+      return 'https://api.flickr.com/services/rest/?method=flickr.photosets.getList&api_key=9470fcbc448530bad59ddcd1b6040790&user_id=' + user + '&primary_photo_extras=url_m,date_taken&format=json&nojsoncallback=1';
     },
     lastAlbum: function(data) {
       return data.photosets.photoset[data.photosets.photoset.length-1];
